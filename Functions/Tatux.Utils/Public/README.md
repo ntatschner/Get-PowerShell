@@ -1,1 +1,1 @@
-# Tatux.Utils Public Functions
+Any functions go here, follow the best practises in the wiki, any functions that can be packaged together in to a module and go on PSGallery should be marked as such
