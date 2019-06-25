@@ -2,6 +2,7 @@ function Test-Uri {
     param (
         # The URI to test
         [Parameter(Mandatory = $true, ValueFromPipeline = $true)]
+        [ValidateNotNullOrEmpty()]
         [Uri[]]
         $Uri
     )
@@ -11,6 +12,7 @@ function Test-Uri {
                 [Uri]'Uri' = $a
                 'Result'   = $false -as [bool]
                 'Status' = ''
+                'ContentType' = ''
             }
             If ($a.IsFile -eq $true) {
                 Write-Error "Please enter a URI.."
@@ -20,26 +22,27 @@ function Test-Uri {
                 Write-Error "Please enter a valid URI, $($a) wasn't formatted correctly.."
                 continue
             }
-            Write-Verbose "URI $($a) Vailidated, moving on."
+            Write-Verbose "URI $($a) Validated, moving on."
             try {
-                Write-Verbose "Testing conectivity to $($a).."
+                Write-Verbose "Testing connectivity to $($a).."
                 $global:NetTest = [System.Net.HttpWebRequest]::CreateDefault($a).GetResponse()
                 if ($(($NetTest.ResponseUri).ToString().Split('//www.')[-1].TrimEnd('/')) -eq $($a.host)) {
                     $Obj = New-Object PSObject -Property $Properties
                     $Obj.Result = $true
                     $Obj.Status = "Success"
+                    $Obj.ContentType = $NetTest.ContentType.split(';')[0]
                     $Obj
                 }
                 else {
                     $Obj = New-Object PSObject -Property $Properties
-                    $Obj.Result = $false
+                    $Obj.Result = $true
                     $Obj.Status = "Connection Succeeded, but redirected to $($NetTest.ResponseUri)"
+                    $Obj.ContentType = $NetTest.ContentType.split(';')[0]
                     $Obj
                 }
             }
             Catch {
-                $_
-                Write-Error "Testing connection to URI $($a) failed.."
+                Write-Error "Testing connection to URI $($a) failed..`nError:$($_.Exception.Message)"
                 continue
             }
         }

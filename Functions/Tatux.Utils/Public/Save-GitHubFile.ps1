@@ -19,19 +19,27 @@ function Save-GitHubFile {
         [Parameter(ParameterSetName = 'AllMatches')]
         [Parameter(ParameterSetName = 'Default')]
         [System.IO.DirectoryInfo]
-        $OutputDirectory = $PWD.Path
+        $OutputDirectory = $PWD.Path,
+        [Switch]
+        $Passthru
     )
     
     begin {
         try {
             Write-Verbose "Testing if $($Uri.OriginalString) is valid and pointing to 'GitHub'"
-            If ($(Test-Uri -Uri $Uri) -eq $false -or $Uri.ToString().ToLower().Contains("github") -eq $false) {
+            $NetTest = $(Test-Uri -Uri $Uri)
+            If ($NetTest -eq $false -or $Uri.ToString().ToLower().Contains("github") -eq $false) {
                 Write-Error "Please enter a valid URI and make sure to use a GitHub URL.."
                 break
             }
         }
         catch {
+            Write-Error $_
             break
+        }
+        # Output Obj
+        $Props = @{
+            [System.IO.FileInfo]'FilePath' = ''
         }
     }
     
@@ -39,7 +47,6 @@ function Save-GitHubFile {
         switch ($PSCmdlet.ParameterSetName) { 
             'Default' {
                 if ($URI.Segments.count -gt 1) {
-
                     Try {
                         $InitialPage = Invoke-WebRequest -Uri $Uri -Method GET -ErrorAction 'Stop'
                         $InitialPageFilter = $InitialPage.links.href | Where-Object -FilterScript { $_ -like $SearchPattern } | Select-Object -First 1
@@ -48,53 +55,59 @@ function Save-GitHubFile {
                             $FileName = $($URI.Host + $InitialPageFilter).split('/')[-1]
                             $OutputFullPath = $(Join-Path -Path $OutputDirectory -ChildPath $FileName)
                             Write-Verbose "Downloading requested file $($FileName) from $($Uri)"
-                            if ($ShowProgress) {
-                                Write-Progress -Activity "Downloadig file from $($Uri)" -Status "Starting" -Id 1 -PercentComplete 0 -CurrentOperation "Starting download of file $($FileName).."
-                            }
-                            if ($ShowProgress) {
-                                Write-Progress -Activity "Downloadig file from $($Uri)" -Status "Downloading" -Id 1 -PercentComplete 50 -CurrentOperation "Downloading file $($FileName).."
-                            }
+
                             $SecondPage = $(Invoke-WebRequest -Uri $InitialPageFullUri -Method GET -ErrorAction 'Stop').links.href | where -FilterScript { $_ -like $("*raw*" + $FileName) } | select -First 1  
-                            $SecondPaageFullPath = $($uri.Host + $SecondPage)
+                            $SecondPageFullPath = $($Uri.Scheme + "://" + $uri.Host + $SecondPage) -as [uri]
                             if ([System.String]::IsNullOrEmpty($SecondPage) -eq $false) {
-                                if ($PSCmdlet.ShouldProcess("Should Process?")) {
-                                        Invoke-WebRequest -Uri $SecondPaageFullPath -Method GET -ContentType $($NetTest.ContentType.split(';')[0]) -OutFile $OutputFullPath -ErrorAction 'Stop'
-                                    } 
-                                    else 
-                                    {
-                                        break
-                                    }
-                                    Write-Verbose "Succesfully downloaded $($FileName) to $($OutputDirectory)"
-                                    if ($ShowProgress) {
-                                        Write-Progress -Activity "Downloadig file from $($Uri)" -Status "Completed" -Id 1 -PercentComplete 100 -CurrentOperation "Finished downloading file $($FileName).." -Completed
+                                if ((Test-Path -Path $OutputDirectory\$FileName) -eq $false) {
+                                    Invoke-WebRequest -Uri $SecondPageFullPath -Method GET -OutFile $OutputFullPath -ErrorAction 'Stop'
+                                    if ($Passthru) {
+                                        $Obj = New-Object psobject -Property $Props
+                                        $Obj.FilePath = $OutputFullPath
+                                        $Obj
                                     }
                                 }
                                 else {
-                                    Write-Error "Second link empty"
-                                    break
+                                    if ($PSCmdlet.ShouldProcess("The file $($FileName) exists in directory $($outputDirectory), would you like to overwrite?")) {
+                                        Invoke-WebRequest -Uri $SecondPageFullPath -Method GET -OutFile $OutputFullPath -ErrorAction 'Stop'
+                                        if ($Passthru) {
+                                            $Obj = New-Object psobject -Property $Props
+                                            $Obj.FilePath = $OutputFullPath
+                                            $Obj
+                                        }
+                                    } 
+                                    else {
+                                        break
+                                    }
                                 }
+                                Write-Verbose "Successfully downloaded $($FileName) to $($OutputDirectory)"
                             }
                             else {
-                                Write-Verbose "Couldn't find the file matching patten $($SearchPattern)"
+                                Write-Error "Second link empty"
+                                break
                             }
                         }
-                        Catch {
-                            $_
+                        else {
+                            Write-Verbose "Couldn't find the file matching patten $($SearchPattern)"
                         }
-
                     }
-                    else {
-                        Write-Warning "No file in path $($uri) specified"
-                        break
+                    Catch {
+                        $_
                     }
-                }
-                'AllMatches' {
 
                 }
-                Default { }
+                else {
+                    Write-Warning "No file in path $($uri) specified"
+                    break
+                }
             }
-        }
-    
-        end {
+            'AllMatches' {
+
+            }
+            Default { }
         }
     }
+    
+    end {
+    }
+}
