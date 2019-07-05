@@ -5,6 +5,7 @@ pipeline {
       agent any
       steps {
         echo 'Test Pipeline'
+        sh 'ls'
       }
     }
   }
