@@ -1,0 +1,17 @@
+﻿<ProjectState>
+  <Version>1.0</Version>
+  <FileID>5349684f-8394-440a-a55b-7095043aef98</FileID>
+  <OpenFolders />
+  <OpenFiles>
+    <File>MainForm.psf</File>
+    <File>Startup.pss</File>
+    <File>SystemInfo.psf</File>
+    <File>Triggers.psf</File>
+    <File>UpdateList.psf</File>
+    <File>Services.psf</File>
+    <File>ADSearcher.psf</File>
+    <File>ImportFromSCCM.psf</File>
+    <File>Globals.ps1</File>
+    <File>RestartConfirmationScreen.psf</File>
+  </OpenFiles>
+</ProjectState>

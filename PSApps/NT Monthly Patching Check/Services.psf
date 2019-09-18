@@ -1,0 +1,884 @@
+﻿<File version="3.1">
+  <FileID>f2251f45-46d7-4519-b05d-50d2c092eed1</FileID>
+  <Preview>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
+nP4b50lEROS+ptgAQERERM+jKTEA2CcABoNBIiIimuRG1+Mpcw+AfVVAW1sbERERTVJ20R9de1/4
+APDll19q1apV+tnPfqbXXntNr776KhEREU1wdo39+c9/7rz3zsDAwIsfAKxZs2Zp3bp1ioyM1Pnz
+54mIiGiCCwsLcw62a2trNTg48o64L3wAmD17tjZv3qzY2FiFh4cTERHRBBcVFaVf//rXqqurm1oD
+wKZNmxQTE6NLly4RERHRBGfvZWcAICIiclkMAERERC6MAYCIiMiFMQAQERG5MAYAIiIiF8YAQERE
+5MIYAIiIiFwYAwAREZELYwAgIiJyYQwARERELowBgIiIyIUxABAREbkwBgAiIiIXxgBARETkwhgA
+iIiIXBgDABERkQtjACAiInJhDABEREQujAGAiIjIhTEAEBERuTAGACIiIhfGAEBEROTCGACIiIhc
+GAMAERGRC2MAICIicmEMAERERC6MAYCIiMiFMQAQERG5MAYAIiIiF8YAQERE5MIYAIiIiFwYAwAR
+EZELYwAgIiJyYQwARERELowBgIiIyIUxABAREbkwBgAiIiIXxgBARETkwhgAiIiIXBgDABERkQtj
+ACAiInJhDABEREQujAGAiIjIhTEAEBERuTAGACIiIhfGAEBEROTCGACIiIhcGAMAERGRC2MAICIi
+cmEMAERERC6MAYCIiMiFMQAQERG5MAYAIiIiF8YAQERE5MIYAIiIiFwYAwAREZELYwAgIiJyYQwA
+RERELowBgIiIyIUxABAREbkwBgAiIiIXxgBARETkwhgAiIiIXBgDABERkQtjACAiInJhDABEREQu
+jAGAiIjIhTEAEBERuTAGACIiIhfGAEBEROTCGACIiIhcGAMAERGRC2MAICIicmEMAERERC6MAYCI
+iMiFMQAQERG5MAYAIiIiF8YAQERE5MIYAIiIiFwYAwAREZELYwAgIiJyYQwARERELowBgIiIyIUx
+ABAREbkwBgAiIiIXxgBARETkwhgAiIiIXBgDABERkQtjACAiInJhDABEREQujAGAiIjIhTEAEBER
+uTAGACIiIhfGAEBEROTCGACIiIhcGAMAERGRC2MAICIicmEMAERERC6MAYCIiMiFMQAQERG5MAYA
+IiIiF8YAQERE5MIYAIiIiFwYAwAREZELYwAgIiJyYQwARERELowBgIiIyIUxABAREbkwBgAiIiIX
+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</Preview>
+  <Form>9eTk15GLHRgAACODCAAAAAAABADVmOtv2jAQwL9P2v8Q5TNqSygvqUUq0Je2rhVh3cfKSa7g1cSR4xTYX79z
+SDcoeThBVFRUqAm+h+9+Oefu7N75Da4Me1+/GMbZ6sKQywDOTXsZSpgd/aK+x+fh0RUXs9V3zUj7
+qWY8gggp989Pj07Up2YMIiYjAec+RFIQVjMeIodR9xssx/wF/HOn3SZNt9mqdxuncNLpmoZPZmj5
+GfXZIF6pC6FpuFPKPIHLzQH3peAsNGNv0d8HwQMQcpnIXUSS2y5hMKQz8JUvuLRVM+qNs+O3pUWi
+d9wDs3eFlgplBoyCL236BwXaXatmNE6tQiEVqz4XHghbLpkyRRfgDSlhfFIofEfEhPpmr1kzkj8N
+kQWdoYt9vkBbhIVQKPIDv83eehIKRVQQrgUNkj3dUK/YjC2JkA88pBITZfYGGEsQDwQzXRz6MSyk
+2ct27/IVtSRrv3PibW7nSd06O44XvUkUo38teBRgGPeO/0QZcvjCymN/OybfuUtWoawji1aztRWW
+rFT/M6ghkeDe6iB8bY31Y+Lc+h4gfDracbUteZBFahYIF67a+DYH2+t/hjDgswAD5TBQwiNA7wT1
+J2ZvLKJUk8Vo9CMpub93MJzYzAhC9eTkw5GLh0pevZuy1SxANgxrySWYYImytotvPiea6+PEl3Gp
+QupTlTzSMCIsrnR94r4MOOMiT8N6LcIjw315F8+n+OZmOUKx4xV2B4uhvRuEnXYlBu2PIDCtUmWe
+QZ+XP/tT04enRGX4WhXZ48G+0auXQk/TnwMkjwefFLwRPAsIpzuwV7HyJYb3DeBJqdNX36WDYzBx
+XgvD95cH2CzUd2kW6jrv5pu9QlqhyukVrEanVLOgo75is5DZNX5UtzAkkmCz7D1SmO+dDw+NTdDY
+KxorYCRlKsIYn2MQxJhfeN4I/csOdq70EBhI2EHBvZqY4MMezdRMR7tgrGnAt23EsbQLai6Econp
+1XQItQ6AsTSCUqZEseQNENxAeAN0Mo1HRommRL2WpurvLxsQaMmN0N97ny1LxBpDm+wSa7R6YMrE
+2UZA4iY+mb9FjKG+1V09BVM+V0m5FIKLUil+kxxzzsY0KC176VGJFeHWVZkpJ4pbrOBvcrgjBFbK
+ZDO/rqYd7zsfdthIyCjsE7H3ahbGlhwiKh93aLxhpUYh9cn5b1D/vFOjYEtzlobgqLlpiTMsP5UZ
+72nEW24PSdfzvHbx9m/Y+wu9ErT3HRgAAA==</Form>
+  <Code><![CDATA[param
+(
+	[parameter(Mandatory = $true)]
+	$ComputerName
+)
+$formServices_Load={
+	
+ 	
+}
+
+#region Control Helper Functions
+function Update-DataGridView
+{
+	<#
+	.SYNOPSIS
+		This functions helps you load items into a DataGridView.
+
+	.DESCRIPTION
+		Use this function to dynamically load items into the DataGridView control.
+
+	.PARAMETER  DataGridView
+		The DataGridView control you want to add items to.
+
+	.PARAMETER  Item
+		The object or objects you wish to load into the DataGridView's items collection.
+	
+	.PARAMETER  DataMember
+		Sets the name of the list or table in the data source for which the DataGridView is displaying data.
+
+	.PARAMETER AutoSizeColumns
+	    Resizes DataGridView control's columns after loading the items.
+	#>
+	Param (
+		[ValidateNotNull()]
+		[Parameter(Mandatory=$true)]
+		[System.Windows.Forms.DataGridView]$DataGridView,
+		[ValidateNotNull()]
+		[Parameter(Mandatory=$true)]
+		$Item,
+	    [Parameter(Mandatory=$false)]
+		[string]$DataMember,
+		[System.Windows.Forms.DataGridViewAutoSizeColumnsMode]$AutoSizeColumns = 'None'
+	)
+	$DataGridView.SuspendLayout()
+	$DataGridView.DataMember = $DataMember
+	
+	if ($null -eq $Item)
+	{
+		$DataGridView.DataSource = $null
+	}
+	elseif ($Item -is [System.Data.DataSet] -and $Item.Tables.Count -gt 0)
+	{
+		$DataGridView.DataSource = $Item.Tables[0]
+	}
+	elseif ($Item -is [System.ComponentModel.IListSource]`
+	-or $Item -is [System.ComponentModel.IBindingList] -or $Item -is [System.ComponentModel.IBindingListView] )
+	{
+		$DataGridView.DataSource = $Item
+	}
+	else
+	{
+		$array = New-Object System.Collections.ArrayList
+		
+		if ($Item -is [System.Collections.IList])
+		{
+			$array.AddRange($Item)
+		}
+		else
+		{
+			$array.Add($Item)
+		}
+		$DataGridView.DataSource = $array
+	}
+	
+	if ($AutoSizeColumns -ne 'None')
+	{
+		$DataGridView.AutoResizeColumns($AutoSizeColumns)
+	}
+	
+	$DataGridView.ResumeLayout()
+}
+
+function ConvertTo-DataTable
+{
+	<#
+		.SYNOPSIS
+			Converts objects into a DataTable.
+	
+		.DESCRIPTION
+			Converts objects into a DataTable, which are used for DataBinding.
+	
+		.PARAMETER  InputObject
+			The input to convert into a DataTable.
+	
+		.PARAMETER  Table
+			The DataTable you wish to load the input into.
+	
+		.PARAMETER RetainColumns
+			This switch tells the function to keep the DataTable's existing columns.
+		
+		.PARAMETER FilterWMIProperties
+			This switch removes WMI properties that start with an underline.
+	
+		.EXAMPLE
+			$DataTable = ConvertTo-DataTable -InputObject (Get-Process)
+	#>
+	[OutputType([System.Data.DataTable])]
+	param(
+	$InputObject, 
+	[ValidateNotNull()]
+	[System.Data.DataTable]$Table,
+	[switch]$RetainColumns,
+	[switch]$FilterWMIProperties)
+	
+	if($null -eq $Table)
+	{
+		$Table = New-Object System.Data.DataTable
+	}
+	
+	if ($null -eq $InputObject)
+	{
+		$Table.Clear()
+		return @( ,$Table)
+	}
+	
+	if ($InputObject -is [System.Data.DataTable])
+	{
+		$Table = $InputObject
+	}
+	elseif ($InputObject -is [System.Data.DataSet] -and $InputObject.Tables.Count -gt 0)
+	{
+		$Table = $InputObject.Tables[0]
+	}
+	else
+	{
+		if (-not $RetainColumns -or $Table.Columns.Count -eq 0)
+		{
+			#Clear out the Table Contents
+			$Table.Clear()
+			
+			if ($null -eq $InputObject) { return } #Empty Data
+			
+			$object = $null
+			#find the first non null value
+			foreach ($item in $InputObject)
+			{
+				if ($null -ne $item)
+				{
+					$object = $item
+					break
+				}
+			}
+			
+			if ($null -eq $object) { return } #All null then empty
+			
+			#Get all the properties in order to create the columns
+			foreach ($prop in $object.PSObject.Get_Properties())
+			{
+				if (-not $FilterWMIProperties -or -not $prop.Name.StartsWith('__')) #filter out WMI properties
+				{
+					#Get the type from the Definition string
+					$type = $null
+					
+					if ($null -ne $prop.Value)
+					{
+						try { $type = $prop.Value.GetType() }
+						catch { Out-Null }
+					}
+					
+					if ($null -ne $type) # -and [System.Type]::GetTypeCode($type) -ne 'Object')
+					{
+						[void]$table.Columns.Add($prop.Name, $type)
+					}
+					else #Type info not found
+					{
+						[void]$table.Columns.Add($prop.Name)
+					}
+				}
+			}
+			
+			if ($object -is [System.Data.DataRow])
+			{
+				foreach ($item in $InputObject)
+				{
+					$Table.Rows.Add($item)
+				}
+				return @( ,$Table)
+			}
+		}
+		else
+		{
+			$Table.Rows.Clear()
+		}
+		
+		foreach ($item in $InputObject)
+		{
+			$row = $table.NewRow()
+			
+			if ($item)
+			{
+				foreach ($prop in $item.PSObject.Get_Properties())
+				{
+					if ($table.Columns.Contains($prop.Name))
+					{
+						$row.Item($prop.Name) = $prop.Value
+					}
+				}
+			}
+			[void]$table.Rows.Add($row)
+		}
+	}
+	
+	return @(,$Table)	
+}
+#endregion
+
+$buttonRefresh_Click={
+	
+	try
+	{
+		$statusbar1.Text = "Looking for Services"
+		$ServicesObj = Get-WmiObject -Class win32_Service -ComputerName $ComputerName
+		
+		if ([System.String]::IsNullOrEmpty($ServicesObj) -eq $false)
+		{
+			Update-DataGridView -DataGridView $datagridview1 -Item $($ServicesObj | select Name, State, Started, Status, Caption, StartMode, AcceptStop, DelayedAutoStart, ProcessID, DesktopInteract, Description)
+			$statusbar1.Text = "Found for $($ServicesObj.Count) Services"
+		}
+		else
+		{
+			$statusbar1.Text = "No Services found"
+		}
+	}
+	catch
+	{
+		[System.Windows.Forms.MessageBox]::Show($_.Exception.Message)
+		$statusbar1.Text = "Failed to find Services"
+	}
+	
+}
+
+$buttonStop_Click={
+	$ButtonText = ($this).Text
+	foreach ($a in $datagridview1.SelectedRows)
+	{
+		$ServiceName = $a.Cells[0].Value
+		$StopCount = 0
+		$StopBreak = $false
+
+		try
+		{
+			$ServiceStop = Get-WmiObject -ComputerName $ComputerName -Query "SELECT * FROM Win32_Service WHERE Name = '$ServiceName'" | Invoke-WmiMethod -Name StopService -ErrorAction Stop
+			
+			switch ($ServiceStop.returnvalue)
+			{
+				0 {
+					$Statusbar1.Text = "$($ButtonText) action returned : The request was accepted."
+				}
+				
+				1 { $Statusbar1.Text = "$($ButtonText) action returned : The request is not supported." }
+				
+				2 { $Statusbar1.Text = "$($ButtonText) action returned : The user did not have the necessary access." }
+				
+				3 { $Statusbar1.Text = "$($ButtonText) action returned : The service cannot be stopped because other services that are running are dependent on it." }
+				
+				4 { $Statusbar1.Text = "$($ButtonText) action returned : The requested control code is not valid, or it is unacceptable to the service." }
+				
+				5 { $Statusbar1.Text = "$($ButtonText) action returned : The requested control code cannot be sent to the service because the state of the service (Win32_BaseService.State property) is equal to 0, 1, or 2." }
+				
+				6 { $Statusbar1.Text = "$($ButtonText) action returned : The service has not been started." }
+				
+				7 { $Statusbar1.Text = "$($ButtonText) action returned : The service did not respond to the start request in a timely fashion." }
+				
+				8 { $Statusbar1.Text = "$($ButtonText) action returned : Unknown failure when starting the service." }
+				
+				9 { $Statusbar1.Text = "$($ButtonText) action returned : The directory path to the service executable file was not found." }
+				
+				10 { $Statusbar1.Text = "$($ButtonText) action returned : The service is already running." }
+				
+				11 { $Statusbar1.Text = "$($ButtonText) action returned : The database to add a new service is locked." }
+				
+				12 { $Statusbar1.Text = "$($ButtonText) action returned : A dependency this service relies on has been removed from the system." }
+				
+				13 { $Statusbar1.Text = "$($ButtonText) action returned : The service failed to find the service needed from a dependent service." }
+				
+				14 { $Statusbar1.Text = "$($ButtonText) action returned : The service has been disabled from the system." }
+				
+				15 { $Statusbar1.Text = "$($ButtonText) action returned : The service does not have the correct authentication to run on the system." }
+				
+				16 { $Statusbar1.Text = "$($ButtonText) action returned : This service is being removed from the system." }
+				
+				17 { $Statusbar1.Text = "$($ButtonText) action returned : The service has no execution thread." }
+				
+				18 { $Statusbar1.Text = "$($ButtonText) action returned : The service has circular dependencies when it starts." }
+				
+				19 { $Statusbar1.Text = "$($ButtonText) action returned : A service is running under the same name." }
+				
+				20 { $Statusbar1.Text = "$($ButtonText) action returned : The service name has invalid characters." }
+				
+				21 { $Statusbar1.Text = "$($ButtonText) action returned : Invalid parameters have been passed to the service." }
+				
+				22 { $Statusbar1.Text = "$($ButtonText) action returned : The account under which this service runs is either invalid or lacks the permissions to run the service." }
+				
+				23 { $Statusbar1.Text = "$($ButtonText) action returned : The service exists in the database of services available from the system." }
+				
+				24 { $Statusbar1.Text = "$($ButtonText) action returned : The service is currently paused in the system." }
+				
+				Default { $Statusbar1.Text = "$($ButtonText) action returned : Other error: $($ServiceStop.returnvalue)" }
+			}
+		}
+		Catch
+		{
+			$Statusbar1.Text = "Failed to initiate $ButtonText command"
+			break
+		}
+		do
+		{
+			$StopCount++
+			$StopServiceState = $(Get-WmiObject -ComputerName $ComputerName -Query "SELECT * FROM Win32_Service WHERE Name = '$ServiceName'").State
+			
+			switch -regex ($StopServiceState)
+			{
+				"Stopped" {
+					$StopBreak = $true
+					$a.Cells[1].Value = "Stopped"
+					$a.Cells[2].Value = $false
+				}
+				"Stop Pending" {
+					$StopBreak = $false
+					$Statusbar1.Text = "Stop Pending for service $ServiceName"
+				}
+				"Fail" {
+					$StopBreak = $true
+				}
+				default
+				{
+					$StopBreak = $true
+				}
+			}
+			Start-Sleep -Seconds 1
+		}
+		while ($($StopBreak -eq $false) -and ($StopCount -le 30))
+		$Statusbar1.Text = "$ServiceName Service Succesfully Stopped"
+	}
+}
+
+$buttonStart_Click={
+	$ButtonText = ($this).Text
+	foreach ($a in $datagridview1.SelectedRows)
+	{
+		$StartCount = 0
+		$StartBreak = $false
+		$ServiceName = $a.Cells[0].Value
+		try
+		{
+			$ServiceStart = Get-WmiObject -ComputerName $ComputerName -Query "SELECT * FROM Win32_Service WHERE Name = '$ServiceName'" | Invoke-WmiMethod -Name StartService -ErrorAction Stop
+			
+			switch ($ServiceStart.returnvalue)
+			{
+				0 {
+					$Statusbar1.Text = "$($ButtonText) action returned : The request was accepted."
+				}
+				
+				1 { $Statusbar1.Text = "$($ButtonText) action returned : The request is not supported." }
+				
+				2 { $Statusbar1.Text = "$($ButtonText) action returned : The user did not have the necessary access." }
+				
+				3 { $Statusbar1.Text = "$($ButtonText) action returned : The service cannot be stopped because other services that are running are dependent on it." }
+				
+				4 { $Statusbar1.Text = "$($ButtonText) action returned : The requested control code is not valid, or it is unacceptable to the service." }
+				
+				5 { $Statusbar1.Text = "$($ButtonText) action returned : The requested control code cannot be sent to the service because the state of the service (Win32_BaseService.State property) is equal to 0, 1, or 2." }
+				
+				6 { $Statusbar1.Text = "$($ButtonText) action returned : The service has not been started." }
+				
+				7 { $Statusbar1.Text = "$($ButtonText) action returned : The service did not respond to the start request in a timely fashion." }
+				
+				8 { $Statusbar1.Text = "$($ButtonText) action returned : Unknown failure when starting the service." }
+				
+				9 { $Statusbar1.Text = "$($ButtonText) action returned : The directory path to the service executable file was not found." }
+				
+				10 { $Statusbar1.Text = "$($ButtonText) action returned : The service is already running." }
+				
+				11 { $Statusbar1.Text = "$($ButtonText) action returned : The database to add a new service is locked." }
+				
+				12 { $Statusbar1.Text = "$($ButtonText) action returned : A dependency this service relies on has been removed from the system." }
+				
+				13 { $Statusbar1.Text = "$($ButtonText) action returned : The service failed to find the service needed from a dependent service." }
+				
+				14 { $Statusbar1.Text = "$($ButtonText) action returned : The service has been disabled from the system." }
+				
+				15 { $Statusbar1.Text = "$($ButtonText) action returned : The service does not have the correct authentication to run on the system." }
+				
+				16 { $Statusbar1.Text = "$($ButtonText) action returned : This service is being removed from the system." }
+				
+				17 { $Statusbar1.Text = "$($ButtonText) action returned : The service has no execution thread." }
+				
+				18 { $Statusbar1.Text = "$($ButtonText) action returned : The service has circular dependencies when it starts." }
+				
+				19 { $Statusbar1.Text = "$($ButtonText) action returned : A service is running under the same name." }
+				
+				20 { $Statusbar1.Text = "$($ButtonText) action returned : The service name has invalid characters." }
+				
+				21 { $Statusbar1.Text = "$($ButtonText) action returned : Invalid parameters have been passed to the service." }
+				
+				22 { $Statusbar1.Text = "$($ButtonText) action returned : The account under which this service runs is either invalid or lacks the permissions to run the service." }
+				
+				23 { $Statusbar1.Text = "$($ButtonText) action returned : The service exists in the database of services available from the system." }
+				
+				24 { $Statusbar1.Text = "$($ButtonText) action returned : The service is currently paused in the system." }
+				
+				Default { $Statusbar1.Text = "$($ButtonText)\ action returned : Other error: $($ServiceStart.returnvalue)" }
+			}
+		}
+		Catch
+		{
+			$Statusbar1.Text = "Failed to initiate $ButtonText command"
+			break
+		}
+		do
+		{
+			$StartCount++
+			$StartServiceState = $(Get-WmiObject -ComputerName $ComputerName -Query "SELECT * FROM Win32_Service WHERE Name = '$ServiceName'").State
+			
+			switch -regex ($StartServiceState)
+			{
+				"Running" {
+					$StartBreak = $true
+					$a.Cells[1].Value = "Running"
+					$a.Cells[2].Value = $true
+				}
+				"Start Pending" {
+					$StartBreak = $false
+					$Statusbar1.Text = "Start Pending for service $ServiceName"
+				}
+				"Fail" {
+					$StartBreak = $true
+				}
+				default
+				{
+					$StartBreak = $true
+				}
+			}
+			Start-Sleep -Seconds 1
+		}
+		while ($($StartBreak -eq $false) -and ($StartCount -le 30))
+		
+		$Statusbar1.Text = "$ServiceName Service Succesfully Started"
+	}
+	
+}
+
+$buttonRestart_Click = {
+	
+	foreach ($a in $datagridview1.SelectedRows)
+	{
+		$ServiceName = $a.Cells[0].Value
+		$StopCount = 0
+		$StartCount = 0
+		$StopBreak = $false
+		$StartBreak = $false
+		# Stop Service
+		
+		try
+		{
+			$ServiceStop = Get-WmiObject -ComputerName $ComputerName -Query "SELECT * FROM Win32_Service WHERE Name = '$ServiceName'" | Invoke-WmiMethod -Name StopService -ErrorAction Stop
+			
+			switch ($ServiceStop.returnvalue)
+			{
+				0 {
+					$Statusbar1.Text = "$("Stop") action returned : The request was accepted."
+				}
+				
+				1 { $Statusbar1.Text = "$("Stop") action returned : The request is not supported." }
+				
+				2 { $Statusbar1.Text = "$("Stop") action returned : The user did not have the necessary access." }
+				
+				3 { $Statusbar1.Text = "$("Stop") action returned : The service cannot be stopped because other services that are running are dependent on it." }
+				
+				4 { $Statusbar1.Text = "$("Stop") action returned : The requested control code is not valid, or it is unacceptable to the service." }
+				
+				5 { $Statusbar1.Text = "$("Stop") action returned : The requested control code cannot be sent to the service because the state of the service (Win32_BaseService.State property) is equal to 0, 1, or 2." }
+				
+				6 { $Statusbar1.Text = "$("Stop") action returned : The service has not been started." }
+				
+				7 { $Statusbar1.Text = "$("Stop") action returned : The service did not respond to the start request in a timely fashion." }
+				
+				8 { $Statusbar1.Text = "$("Stop") action returned : Unknown failure when starting the service." }
+				
+				9 { $Statusbar1.Text = "$("Stop") action returned : The directory path to the service executable file was not found." }
+				
+				10 { $Statusbar1.Text = "$("Stop") action returned : The service is already running." }
+				
+				11 { $Statusbar1.Text = "$("Stop") action returned : The database to add a new service is locked." }
+				
+				12 { $Statusbar1.Text = "$("Stop") action returned : A dependency this service relies on has been removed from the system." }
+				
+				13 { $Statusbar1.Text = "$("Stop") action returned : The service failed to find the service needed from a dependent service." }
+				
+				14 { $Statusbar1.Text = "$("Stop") action returned : The service has been disabled from the system." }
+				
+				15 { $Statusbar1.Text = "$("Stop") action returned : The service does not have the correct authentication to run on the system." }
+				
+				16 { $Statusbar1.Text = "$("Stop") action returned : This service is being removed from the system." }
+				
+				17 { $Statusbar1.Text = "$("Stop") action returned : The service has no execution thread." }
+				
+				18 { $Statusbar1.Text = "$("Stop") action returned : The service has circular dependencies when it starts." }
+				
+				19 { $Statusbar1.Text = "$("Stop") action returned : A service is running under the same name." }
+				
+				20 { $Statusbar1.Text = "$("Stop") action returned : The service name has invalid characters." }
+				
+				21 { $Statusbar1.Text = "$("Stop") action returned : Invalid parameters have been passed to the service." }
+				
+				22 { $Statusbar1.Text = "$("Stop") action returned : The account under which this service runs is either invalid or lacks the permissions to run the service." }
+				
+				23 { $Statusbar1.Text = "$("Stop") action returned : The service exists in the database of services available from the system." }
+				
+				24 { $Statusbar1.Text = "$("Stop") action returned : The service is currently paused in the system." }
+				
+				Default { $Statusbar1.Text = "$("Stop") action returned : Other error: $($ServiceStop.returnvalue)" }
+			}
+		}
+		Catch
+		{
+			$Statusbar1.Text = "Failed to initiate Stop command"
+			break
+		}
+		do
+		{
+			$StopCount++
+			$global:StopServiceState = $(Get-WmiObject -ComputerName $ComputerName -Query "SELECT * FROM Win32_Service WHERE Name = '$ServiceName'").State
+			
+			switch -regex ($StopServiceState)
+			{
+				"Stopped" {
+					$StopBreak = $true
+					$a.Cells[1].Value = "Stopped"
+					$a.Cells[2].Value = $true
+				}
+				"Stop Pending" {
+					$StopBreak = $false
+					$Statusbar1.Text = "Stop Pending"
+				}
+				"Fail" {
+					$StopBreak = $true
+				}
+				default
+				{
+					$StopBreak = $true
+				}
+			}
+			Start-Sleep -Seconds 1
+		}
+		while ($($StopBreak -eq $false) -and ($StopCount -le 30))
+		#Start Service
+		
+		if ($StopServiceState -eq "Stopped")
+		{
+			try
+			{
+				$ServiceStart = Get-WmiObject -ComputerName $ComputerName -Query "SELECT * FROM Win32_Service WHERE Name = 'CcmExec'" | Invoke-WmiMethod -Name StartService -ErrorAction Stop
+				
+				switch ($ServiceStart.returnvalue)
+				{
+					0 {
+						$Statusbar1.Text = "$($ButtonText) action returned : The request was accepted."
+					}
+					
+					1 { $Statusbar1.Text = "$($ButtonText) action returned : The request is not supported." }
+					
+					2 { $Statusbar1.Text = "$($ButtonText) action returned : The user did not have the necessary access." }
+					
+					3 { $Statusbar1.Text = "$($ButtonText) action returned : The service cannot be stopped because other services that are running are dependent on it." }
+					
+					4 { $Statusbar1.Text = "$($ButtonText) action returned : The requested control code is not valid, or it is unacceptable to the service." }
+					
+					5 { $Statusbar1.Text = "$($ButtonText) action returned : The requested control code cannot be sent to the service because the state of the service (Win32_BaseService.State property) is equal to 0, 1, or 2." }
+					
+					6 { $Statusbar1.Text = "$($ButtonText) action returned : The service has not been started." }
+					
+					7 { $Statusbar1.Text = "$($ButtonText) action returned : The service did not respond to the start request in a timely fashion." }
+					
+					8 { $Statusbar1.Text = "$($ButtonText) action returned : Unknown failure when starting the service." }
+					
+					9 { $Statusbar1.Text = "$($ButtonText) action returned : The directory path to the service executable file was not found." }
+					
+					10 { $Statusbar1.Text = "$($ButtonText) action returned : The service is already running." }
+					
+					11 { $Statusbar1.Text = "$($ButtonText) action returned : The database to add a new service is locked." }
+					
+					12 { $Statusbar1.Text = "$($ButtonText) action returned : A dependency this service relies on has been removed from the system." }
+					
+					13 { $Statusbar1.Text = "$($ButtonText) action returned : The service failed to find the service needed from a dependent service." }
+					
+					14 { $Statusbar1.Text = "$($ButtonText) action returned : The service has been disabled from the system." }
+					
+					15 { $Statusbar1.Text = "$($ButtonText) action returned : The service does not have the correct authentication to run on the system." }
+					
+					16 { $Statusbar1.Text = "$($ButtonText) action returned : This service is being removed from the system." }
+					
+					17 { $Statusbar1.Text = "$($ButtonText) action returned : The service has no execution thread." }
+					
+					18 { $Statusbar1.Text = "$($ButtonText) action returned : The service has circular dependencies when it starts." }
+					
+					19 { $Statusbar1.Text = "$($ButtonText) action returned : A service is running under the same name." }
+					
+					20 { $Statusbar1.Text = "$($ButtonText) action returned : The service name has invalid characters." }
+					
+					21 { $Statusbar1.Text = "$($ButtonText) action returned : Invalid parameters have been passed to the service." }
+					
+					22 { $Statusbar1.Text = "$($ButtonText) action returned : The account under which this service runs is either invalid or lacks the permissions to run the service." }
+					
+					23 { $Statusbar1.Text = "$($ButtonText) action returned : The service exists in the database of services available from the system." }
+					
+					24 { $Statusbar1.Text = "$($ButtonText) action returned : The service is currently paused in the system." }
+					
+					Default { $Statusbar1.Text = "$($ButtonText)\ action returned : Other error: $($ServiceStart.returnvalue)" }
+				}
+			}
+			Catch
+			{
+				$Statusbar1.Text = "Failed to initiate Start command"
+				break
+			}
+			do
+			{
+				$StartCount++
+				$StartServiceState = $(Get-WmiObject -ComputerName $ComputerName -Query "SELECT * FROM Win32_Service WHERE Name = 'CcmExec'").State
+				
+				switch -regex ($StartServiceState)
+				{
+					"Running" {
+						$StartBreak = $true
+						$a.Cells[1].Value = "Running"
+						$a.Cells[2].Value = $true
+					}
+					"Start Pending" {
+						$StartBreak = $false
+						$Statusbar1.Text = "Start Pending"
+					}
+					"Fail" {
+						$StartBreak = $true
+					}
+					default
+					{
+						$StartBreak = $true
+					}
+				}
+				Start-Sleep -Seconds 1
+			}
+			while ($($StartBreak -eq $false) -and ($StartCount -le 30))
+			
+			$Statusbar1.Text = "$ServiceName Service Succesfully Restarted"
+		}
+		else
+		{
+			$Statusbar1.Text = "Failed to restart after stopping $ServiceName Service"
+		}
+	}
+}
+]]></Code>
+  <Mode>1</Mode>
+  <Assemblies />
+</File>
