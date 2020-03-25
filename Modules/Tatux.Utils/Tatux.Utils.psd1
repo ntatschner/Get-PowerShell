@@ -24,13 +24,13 @@ GUID = '061256e7-9e17-4571-9481-baca2e0bc13e'
 Author = 'Nigel Tatschner'
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+CompanyName = 'Tatux Solutions'
 
 # Copyright statement for this module
 Copyright = '(c) 2019 . All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Module Description'
+Description = 'A Set of utilities ive created to help with various tasks'
 
 # Minimum version of the PowerShell engine required by this module
  PowerShellVersion = '5.1'
