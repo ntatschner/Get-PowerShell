@@ -31,3 +31,5 @@ $Time = Get-Date -UFormat "%H:%M:%S"
 #region export Public functions ($Public.BaseName) for WIP modules
 Export-ModuleMember -Function $Public.Basename
 #endregion
+
+# -Path "$PSScriptRoot\$(Split-Path -Path $PSCommandPath -Leaf)"
