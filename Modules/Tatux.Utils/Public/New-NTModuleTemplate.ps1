@@ -1,4 +1,3 @@
-function New-NTModuleTemplate {
 	<#
     .SYNOPSIS
     Generate module scaffolding and boilerplate.
@@ -56,8 +55,9 @@ function New-NTModuleTemplate {
 	Description = "This module will rock your world!"
 	RequiredModules = 'All','My','Other','Modules'
     }
-    New-ModuleTemplate @Params
+    New-NTModuleTemplate @Params
     #>
+function New-NTModuleTemplate {
 	[CmdletBinding()]
 	Param (
 		[Parameter(Mandatory, ValueFromPipeline)]

@@ -1,4 +1,4 @@
-function ConvertTo-FlatJSON
+function ConvertTo-NTFlatJSON
 {
 	[CmdletBinding()]
 	[OutputType([System.String])]

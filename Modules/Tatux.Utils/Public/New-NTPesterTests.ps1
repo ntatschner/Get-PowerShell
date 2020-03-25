@@ -15,7 +15,7 @@
 		PS C:\> New-AMTPesterTests
 	
 #>
-function New-AMTPesterTests {
+function New-NTPesterTests {
 	[CmdletBinding()]
 	param
 	(

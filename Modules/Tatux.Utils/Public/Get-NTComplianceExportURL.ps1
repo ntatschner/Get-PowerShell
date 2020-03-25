@@ -15,7 +15,7 @@
 		System.Management.Automation.PSObject
 	
 #>
-function Get-AMTComplianceExportURL
+function Get-NTComplianceExportURL
 {
 	[CmdletBinding()]
 	[OutputType([psobject])]

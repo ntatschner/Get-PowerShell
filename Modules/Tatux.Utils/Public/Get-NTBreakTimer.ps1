@@ -29,7 +29,7 @@
 	.NOTES
 		Additional information about the function.
 #>
-function Get-BreakTimer
+function Get-NTBreakTimer
 {
 	[CmdletBinding(DefaultParameterSetName = 'Specific')]
 	[OutputType([boolean], ParameterSetName = 'Specific')]

@@ -1,4 +1,4 @@
-function ConvertFrom-AMTInvalidFolderCharacters
+function ConvertFrom-NTInvalidFolderCharacters
 {
 	[CmdletBinding()]
 	param
