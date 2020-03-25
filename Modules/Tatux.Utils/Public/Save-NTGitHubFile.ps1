@@ -1,4 +1,4 @@
-function Save-GitHubFile {
+function Save-NTGitHubFile {
     [CmdletBinding(SupportsShouldProcess, ConfirmImpact = 'High', DefaultParameterSetName = 'Default')]
     param (
         [Parameter(ParameterSetName = 'AllMatches')]

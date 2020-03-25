@@ -1,4 +1,4 @@
-function Remove-Diacritics
+function Remove-NTDiacritics
 {
 	[CmdletBinding()]
 	param
