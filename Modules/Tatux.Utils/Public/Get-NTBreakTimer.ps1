@@ -24,7 +24,7 @@
 		PS C:\> Get-BreakTimer
 	
 	.OUTPUTS
-		boolean, boolean, boolean
+		boolean
 	
 	.NOTES
 		Additional information about the function.
