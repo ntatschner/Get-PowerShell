@@ -22,9 +22,9 @@ function Generate-NTPassword {
 		$SourceData = $NULL; For ($a = 33; $a –le 126; $a++) { $SourceData += , [char][byte]$a } # Converts numbers to legal character bytes for output
 	
 		For ($loop = 1; $loop –le $length; $loop++) {
-			# Loops for the ammount of length specified
+			# Loops for the amount of length specified
 		
-			$Password += ($SourceData | Get-Random) # Gets a randon character from list and stores it for output
+			$Password += ($SourceData | Get-Random) # Gets a random character from list and stores it for output
 		
 		}
 	
