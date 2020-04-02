@@ -6,4 +6,3 @@ More being added from my historic work and updates to old code
 
 Nigel Tatschner
 :)
-:)
