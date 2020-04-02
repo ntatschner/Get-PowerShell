@@ -2,4 +2,4 @@
 
 *Utility tools for PowerShell*
 
-More being added from my historic work and updates to old code etc
+More being added from my historic work and updates to old code etc.
