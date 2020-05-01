@@ -1,4 +1,4 @@
-$TestPath = '..'
+$TestPath = Split-Path -Parent -Path (Split-Path -Path $MyInvocation.MyCommand.Path -Parent)
 $FunctionFileName = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
 $FunctionName = $FunctionFileName.Replace('.ps1', '')
 . "$TestPath\$FunctionFileName"
