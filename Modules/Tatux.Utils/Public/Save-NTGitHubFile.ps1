@@ -56,7 +56,7 @@ function Save-NTGitHubFile {
                             $OutputFullPath = $(Join-Path -Path $OutputDirectory -ChildPath $FileName)
                             Write-Verbose "Downloading requested file $($FileName) from $($Uri)"
 
-                            $SecondPage = $(Invoke-WebRequest -Uri $InitialPageFullUri -Method GET -ErrorAction 'Stop').links.href | where -FilterScript { $_ -like $("*raw*" + $FileName) } | select -First 1  
+                            $SecondPage = $(Invoke-WebRequest -Uri $InitialPageFullUri -Method GET -ErrorAction 'Stop').links.href | Where-Object -FilterScript { $_ -like $("*raw*" + $FileName) } | Select-Object -First 1  
                             $SecondPageFullPath = $($Uri.Scheme + "://" + $uri.Host + $SecondPage) -as [uri]
                             if ([System.String]::IsNullOrEmpty($SecondPage) -eq $false) {
                                 if ((Test-Path -Path $OutputDirectory\$FileName) -eq $false) {
