@@ -3,37 +3,37 @@
 		Searches a word document for desired test and outputs results
 	
 	.DESCRIPTION
-		A detailed description of the Search-WordDoc function.
+		Using the Find function the the Word.Application Comobject this function searches for the enter text. It has multiple switch options to chnage the search behavuor and returns an opject with a propertie determining if it matched or not
 	
 	.PARAMETER Path
-		Enter the path of the file you'd like to search
+		The path of the word doc you would like to search, use doc or docx.
 	
 	.PARAMETER MatchCase
-		A description of the MatchCase parameter.
+		Match the case of the enterd string exactly.
 	
 	.PARAMETER MatchWholeWord
-		A description of the MatchWholeWord parameter.
+		Only match a whole word and not matches inside words.
 	
 	.PARAMETER MatchSoundsLike
-		A description of the MatchSoundsLike parameter.
+		Matches on text that sounds like the entered text, ie. write, riot.
 	
 	.PARAMETER MatchAllWordForms
-		A description of the MatchAllWordForms parameter.
+		Matches on forms of the entered string, i.e color, colour.
 	
 	.PARAMETER Query
-		A description of the Query parameter.
+		The string to search for.
 	
 	.PARAMETER MatchWildCard
-		A description of the MatchWildCard parameter.
+		Matches any wild card character entered in the string, ie. *.
 	
 	.EXAMPLE
 		PS C:\> Search-WordDoc -Path $value1
 	
 	.OUTPUTS
-		boolean, string
+		Object
 	
 	.NOTES
-		Additional information about the function.
+		Uses the Word.Application ComObject and thus needs office installed on the machine running the command.
 #>
 function Search-WordDoc
 {
@@ -68,7 +68,8 @@ function Search-WordDoc
 		[boolean]$MatchSoundsLike = $false,
 		[Parameter(ParameterSetName = 'Match')]
 		[boolean]$MatchAllWordForms = $false,
-		[Parameter(ParameterSetName = 'Match')]
+		[Parameter(ParameterSetName = 'Match',
+				   Mandatory = $true)]
 		[string]$Query,
 		[Parameter(ParameterSetName = 'Match')]
 		[boolean]$MatchWildCard
