@@ -112,7 +112,6 @@
 	.OUTPUTS
 		void, System.String
 #>
-#Requires -Module SharePointPnPPowerShellOnline
 #Requires -Version 3.0
 function Write-NTSPLog
 {
@@ -176,6 +175,13 @@ function Write-NTSPLog
 		# Embedded Functions Start		
 		#region	Modules		
 		
+		try {
+			Get-Module -Name SharePointPnPPowerShellOnline -ErrorAction Stop
+		} Catch {
+			Write-Error "Module: SharePointPnPPowerShellOnline not found"
+			break
+		}
+
 		function ConvertTo-CapitalSplit
 		{
 			param
