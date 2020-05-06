@@ -3,7 +3,7 @@
 		Takes the output of Get-ComplianceSearchAction and pulls the result URL and SAS token out
 	
 	.DESCRIPTION
-		From the property 'Results' the Cmdlet Get-ComplianceSearchAction produces this command pulls out from the sting the URL and SAS token so it can be utalised easily.
+		From the property 'Results' the Cmdlet Get-ComplianceSearchAction produces this command pulls out from the sting the URL and SAS token so it can be utilized easily.
 	
 	.PARAMETER Results
 		The returned object of Get-ComplianceSearchAction
