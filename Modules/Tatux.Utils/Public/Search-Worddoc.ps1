@@ -3,13 +3,13 @@
 		Searches a word document for desired test and outputs results
 	
 	.DESCRIPTION
-		Using the Find function the the Word.Application Comobject this function searches for the enter text. It has multiple switch options to chnage the search behavuor and returns an opject with a propertie determining if it matched or not
+		Using the Find function the the Word.Application Comobject this function searches for the enter text. It has multiple switch options to change the search behavior and returns an object with a properties determining if it matched or not
 	
 	.PARAMETER Path
 		The path of the word doc you would like to search, use doc or docx.
 	
 	.PARAMETER MatchCase
-		Match the case of the enterd string exactly.
+		Match the case of the entered string exactly.
 	
 	.PARAMETER MatchWholeWord
 		Only match a whole word and not matches inside words.
