@@ -12,7 +12,7 @@
 RootModule = 'Tatux.Utils'
 
 # Version number of this module.
-ModuleVersion = '0.2.6'
+ModuleVersion = '0.2.7'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Added new function: Search-WordDoc'
+        ReleaseNotes = 'Added new function: Search-ExcelDoc'
 
         # External dependent modules of this module
         # ExternalModuleDependencies = ''
