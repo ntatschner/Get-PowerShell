@@ -52,9 +52,9 @@ function Search-WordDoc
 				{
 					throw "The Path argument must be a file. Folder paths are not allowed."
 				}
-				if ($_ -notmatch "(\.doci|\.docx)")
+				if ($_ -notmatch "(\.doc|\.docx)")
 				{
-					throw "The file specified in the path argument must be either of type msi or exe"
+					throw "The file specified in the path argument must be either of type xls or xlsx"
 				}
 				return $true
 			})]
