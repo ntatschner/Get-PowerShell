@@ -21,70 +21,65 @@
 		Uses the class [iTextSharpe] fir iTextSharpe.dll and thus needs the file located with the module.
 #>
 function Search-PDFDoc {
-	[CmdletBinding(DefaultParameterSetName = 'Match')]
-	[OutputType([string], ParameterSetName = 'Match')]
-	param
-	(
-		[Parameter(ParameterSetName = 'Match',
-			Mandatory = $true)]
-		[ValidateScript( {
-				if (-Not ($_ | Test-Path)) {
-					throw "File or folder does not exist"
-				}
-				if (-Not ($_ | Test-Path -PathType Leaf)) {
-					throw "The Path argument must be a file. Folder paths are not allowed."
-				}
-				if ($_ -notmatch "(\.xls|\.xlsx|\.xlsm)") {
-					throw "The file specified in the path argument must be either of type xls, xlsx or xlsm"
-				}
-				return $true
-			})]
-		[ValidateNotNullOrEmpty()]
-		[string]$Path,
-		[string[]]$Query
-	)
+    [CmdletBinding(DefaultParameterSetName = 'Match')]
+    [OutputType([string], ParameterSetName = 'Match')]
+    param
+    (
+        [Parameter(ParameterSetName = 'Match',
+            Mandatory = $true)]
+        [ValidateScript( {
+                if (-Not ($_ | Test-Path)) {
+                    throw "File or folder does not exist"
+                }
+                if (-Not ($_ | Test-Path -PathType Leaf)) {
+                    throw "The Path argument must be a file. Folder paths are not allowed."
+                }
+                if ($_ -notmatch "(\.pdf)") {
+                    throw "The file specified in the path argument must be either of type pdf"
+                }
+                return $true
+            })]
+        [ValidateNotNullOrEmpty()]
+        [string]$Path,
+        [string[]]$Query
+    )
 	
-	BEGIN {
-		$application = New-Object -comobject excel.application
-		$application.visible = $False
-		
-	}
-	PROCESS {
-		# Open doc ready for searching
-		$Workbooks = $application.Workbooks.open($Path)
-		$Sheets = $Workbooks.Sheets
-		
-		# Search for queried text
-		
-		foreach ($a in $Sheets) {
-			foreach ($Q in $Query) {
-				$QueryResults = $a.Cells.Find($Q)
-				$Props = [ordered]@{
-					Name  = (Split-Path -Path $Path -Leaf)
-					Query = $Q
-					Path  = $Path
-					Match = $QueryResults -as [bool]
-				}
-				$Obj = New-Object PSObject -Property $Props
+    BEGIN {
+        $FunctionPath = Split-Path -Path $PSCommandPath -Parent
+        try {
+            Add-Type -Path "$FunctionPath\itextsharp.dll" -ErrorAction SilentlyContinue
+            Write-Verbose "Class itextsharp.dll loaded."
+        }
+        catch {
+            Write-Verbose "Class itextsharp.dll already loaded."
+        }
+        #Load File
+        $PDFReader = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $Path
+    }
+    PROCESS {
 
-				if ($QueryResults) {
-					$Obj
-					break
-				}
-			}
-		}
-	}
-	END {
-		$application.quit()
+        for ($Page = 1 ; $Page -le $PDFReader.NumberOfPages ; $Page++) {
+            # Search for queried text
+            $PageText = [iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($PDFReader, $Page).Split([char]0x000A)
+            foreach ($Q in $Query) {
+                if ($PageText -match $Q) {
+                    $Props = [ordered]@{
+                        Name  = (Split-Path -Path $Path -Leaf)
+                        Query = $Q
+                        Path  = $Path
+                        Match = $true -as [bool]
+                    }
+                    $Obj = New-Object PSObject -Property $Props
+                    $Obj
+                    break
+                }
+            }
+        }
+    }
+    END {
 		
-		[System.Runtime.InteropServices.Marshal]::ReleaseComObject($Workbooks) | Out-Null
+        [gc]::collect()
 		
-		[System.Runtime.InteropServices.Marshal]::ReleaseComObject($application) | Out-Null
-		
-		Remove-Variable -Name application
-		
-		[gc]::collect()
-		
-		[gc]::WaitForPendingFinalizers()
-	}
+        [gc]::WaitForPendingFinalizers()
+    }
 }
