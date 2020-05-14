@@ -1,26 +1,26 @@
 <#
 	.SYNOPSIS
-		Searches a Excel document for desired test and outputs results
+		Searches a PDF document for desired test and outputs results
 	
 	.DESCRIPTION
-		Using the Find function the the Excel.Application Comobject this function searches for the enter text. It has multiple switch options to change the search behavior and returns an object with a properties determining if it matched or not
+		Using the find function of the .net module iTextSharpe.dll this function searches for the enter text.
 	
 	.PARAMETER Path
-		The path of the word doc you would like to search, use xls or xlsx.
+		The path of the PDF doc you would like to search, use .PDF.
 	
 	.PARAMETER Query
 		The string to search for.
 	
 	.EXAMPLE
-		PS C:\> Search-ExcelDoc -Path $value1
+		PS C:\> Search-PDFDoc -Path $value1 -Query "data"
 	
 	.OUTPUTS
 		Object
 	
 	.NOTES
-		Uses the Word.Application ComObject and thus needs office installed on the machine running the command.
+		Uses the class [iTextSharpe] fir iTextSharpe.dll and thus needs the file located with the module.
 #>
-function Search-ExcelDoc {
+function Search-PDFDoc {
 	[CmdletBinding(DefaultParameterSetName = 'Match')]
 	[OutputType([string], ParameterSetName = 'Match')]
 	param

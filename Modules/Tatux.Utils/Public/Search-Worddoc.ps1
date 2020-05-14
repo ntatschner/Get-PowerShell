@@ -35,25 +35,21 @@
 	.NOTES
 		Uses the Word.Application ComObject and thus needs office installed on the machine running the command.
 #>
-function Search-WordDoc
-{
+function Search-WordDoc {
 	[CmdletBinding(DefaultParameterSetName = 'Match')]
 	[OutputType([string], ParameterSetName = 'Match')]
 	param
 	(
 		[Parameter(ParameterSetName = 'Match',
-				   Mandatory = $true)]
-		[ValidateScript({
-				if (-Not ($_ | Test-Path))
-				{
+			Mandatory = $true)]
+		[ValidateScript( {
+				if (-Not ($_ | Test-Path)) {
 					throw "File or folder does not exist"
 				}
-				if (-Not ($_ | Test-Path -PathType Leaf))
-				{
+				if (-Not ($_ | Test-Path -PathType Leaf)) {
 					throw "The Path argument must be a file. Folder paths are not allowed."
 				}
-				if ($_ -notmatch "(\.doc|\.docx)")
-				{
+				if ($_ -notmatch "(\.doc|\.docx)") {
 					throw "The file specified in the path argument must be either of type xls or xlsx"
 				}
 				return $true
@@ -69,14 +65,13 @@ function Search-WordDoc
 		[Parameter(ParameterSetName = 'Match')]
 		[boolean]$MatchAllWordForms = $false,
 		[Parameter(ParameterSetName = 'Match',
-				   Mandatory = $true)]
+			Mandatory = $true)]
 		[string]$Query,
 		[Parameter(ParameterSetName = 'Match')]
 		[boolean]$MatchWildCard
 	)
 	
-	BEGIN
-	{
+	BEGIN {
 		$application = New-Object -comobject word.application
 		$application.visible = $False
 		
@@ -84,38 +79,35 @@ function Search-WordDoc
 		$wrap = 1
 		
 	}
-	PROCESS
-	{
+	PROCESS {
 		# Open doc ready for searching
 		$Document = $application.documents.open($Path)
 		$Range = $Document.content
-		$null = $Range.movestart()
+		foreach ($Q in $Query) {
+			# Search for queried text
+			$null = $Range.movestart()
+			$QueryResults = $Range.find.execute($Q, $MatchCase,
+				$MatchWholeWord, $MatchWildCard, $MatchSoundsLike,
+				$MatchAllWordForms, $forward, $wrap)
 		
-		# Search for queried text
+			$Props = [ordered]@{
+				Name  = (Split-Path -Path $Path -Leaf)
+				Query = $Q
+				Path  = $Path
+				Match = $QueryResults -as [bool]
+			}
+			$Obj = New-Object PSObject -Property $Props
 		
-		$QueryResults = $Range.find.execute($Query, $MatchCase,
-			$MatchWholeWord, $MatchWildCard, $MatchSoundsLike,
-			$MatchAllWordForms, $forward, $wrap)
-		
-		$Props = [ordered]@{
-			Name = (Split-Path -Path $Path -Leaf)
-			Path = $Path
-			Match = $QueryResults -as [bool]
-		}
-		$Obj = New-Object PSObject -Property $Props
-		
-		if ($QueryResults)
-		{
-			Write-Output $Obj
-		}
-		else
-		{
-			Write-Verbose "Query didn't find anything for $Path"
-			Write-Output $Obj
+			if ($QueryResults) {
+				Write-Output $Obj
+			}
+			else {
+				Write-Verbose "Query didn't find anything for $Path"
+				Write-Output $Obj
+			}
 		}
 	}
-	END
-	{
+	END {
 		$document.close()
 		$application.quit()
 		
