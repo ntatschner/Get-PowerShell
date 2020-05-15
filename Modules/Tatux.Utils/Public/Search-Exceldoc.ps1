@@ -45,31 +45,65 @@ function Search-ExcelDoc {
 	)
 	
 	BEGIN {
-		$application = New-Object -comobject excel.application
+		try {
+			$application = New-Object -comobject excel.application -ErrorAction Stop
+		}
+		catch {
+			Write-Error "Failed to load Excel Com Object, make sure Microsoft Excel is installed."
+			break
+		}
 		$application.visible = $False
 		
+		$Props = [ordered]@{
+			Name   = (Split-Path -Path $Path -Leaf)
+			Type   = (Split-Path -Path $Path -Leaf).Split('.')[-1]
+			Query  = 'N/A'
+			Page   = 'N/A'
+			Path   = $Path
+			Match  = 'N/A'
+			Result = ''
+		}
 	}
 	PROCESS {
 		# Open doc ready for searching
-		$Workbooks = $application.Workbooks.open($Path)
+		try {
+			$Workbooks = $application.Workbooks.open($Path)
+		}
+		catch {
+			Write-Error "Failed to open $Path, Error: $($_.Exception.Message)"
+			$Obj = New-Object PSObject -Property $Props
+			$Obj.Results = "Failed-Document"
+			break
+		}
 		$Sheets = $Workbooks.Sheets
-		
 		# Search for queried text
 		
 		foreach ($a in $Sheets) {
 			foreach ($Q in $Query) {
-				$QueryResults = $a.Cells.Find($Q)
-				$Props = [ordered]@{
-					Name  = (Split-Path -Path $Path -Leaf)
-					Query = $Q
-					Path  = $Path
-					Match = $QueryResults -as [bool]
+				try {
+					$QueryResults = $a.Cells.Find($Q)
 				}
-				$Obj = New-Object PSObject -Property $Props
-
-				if ($QueryResults) {
+				catch {
+					Write-Error "Failed to search document $Path. $($_.Exception.Message)"
+					$Obj = New-Object PSObject -Property $Props
+					$Obj.Query = $Q
+					$Obj.Page = "Sheet: $($a.Name)"
+					$Obj.Results = "Failed-Document"
 					$Obj
 					break
+				}
+				$Obj = New-Object PSObject -Property $Props
+				$Obj.Query = $Q
+				$Obj.Page = "Sheet: $($a.Name)"
+				if ($QueryResults) {
+					$Obj.Match = $true
+					$Obj.Result = "Success"
+					$Obj
+					break
+				} else {
+					$Obj.Match = $false
+					$Obj.Result = "Success"
+					$Obj
 				}
 			}
 		}

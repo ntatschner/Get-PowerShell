@@ -66,44 +66,73 @@ function Search-WordDoc {
 		[boolean]$MatchAllWordForms = $false,
 		[Parameter(ParameterSetName = 'Match',
 			Mandatory = $true)]
-		[string]$Query,
+		[string[]]$Query,
 		[Parameter(ParameterSetName = 'Match')]
 		[boolean]$MatchWildCard
 	)
 	
 	BEGIN {
-		$application = New-Object -comobject word.application
+		try {
+			$application = New-Object -comobject word.application
+		}
+		Catch {
+			Write-Error "Failed to load Word Com Object, check Microsoft Word is installed."
+			break
+		}
 		$application.visible = $False
 		
 		$forward = $true
 		$wrap = 1
-		
+		$Props = [ordered]@{
+			Name   = (Split-Path -Path $Path -Leaf)
+			Type   = (Split-Path -Path $Path -Leaf).Split('.')[-1]
+			Query  = 'N/A'
+			Page   = 'N/A'
+			Path   = $Path
+			Match  = 'N/A'
+			Result = ''
+		}
 	}
 	PROCESS {
 		# Open doc ready for searching
-		$Document = $application.documents.open($Path)
+		try {
+			$Document = $application.documents.open($Path)
+		}
+		catch {
+			Write-Error "Failed to open document $Path. Error: $($_.Exception.Message)"
+			$Obj = New-Object PSObject -Property $Props
+			$Obj.Results = "Failed-Document"
+			break
+		}
 		$Range = $Document.content
 		foreach ($Q in $Query) {
 			# Search for queried text
 			$null = $Range.movestart()
-			$QueryResults = $Range.find.execute($Q, $MatchCase,
-				$MatchWholeWord, $MatchWildCard, $MatchSoundsLike,
-				$MatchAllWordForms, $forward, $wrap)
-		
-			$Props = [ordered]@{
-				Name  = (Split-Path -Path $Path -Leaf)
-				Query = $Q
-				Path  = $Path
-				Match = $QueryResults -as [bool]
+			try {
+				$QueryResults = $Range.find.execute($Q, $MatchCase,
+					$MatchWholeWord, $MatchWildCard, $MatchSoundsLike,
+					$MatchAllWordForms, $forward, $wrap)
+			}
+			catch {
+				Write-Error "Failed to search document $Path. $($_.Exception.Message)"
+				$Obj = New-Object PSObject -Property $Props
+				$Obj.Query = $Q
+				$Obj.Results = "Failed-Document"
+				$Obj
+				break
 			}
 			$Obj = New-Object PSObject -Property $Props
-		
+			$Obj.Query = $Q
 			if ($QueryResults) {
-				Write-Output $Obj
+				$Obj.Match = $true
+				$Obj.Result = "Success"
+				$Obj
+				break
 			}
 			else {
-				Write-Verbose "Query didn't find anything for $Path"
-				Write-Output $Obj
+				$Obj.Match = $false
+				$Obj.Result = "Success"
+				$Obj
 			}
 		}
 	}

@@ -54,24 +54,51 @@ function Search-PDFDoc {
             Write-Verbose "Class itextsharp.dll already loaded."
         }
         #Load File
-        $PDFReader = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $Path
+        $Props = [ordered]@{
+            Name   = (Split-Path -Path $Path -Leaf)
+            Type   = (Split-Path -Path $Path -Leaf).Split('.')[-1]
+            Query  = 'N/A'
+            Page   = 'N/A'
+            Path   = $Path
+            Match  = 'N/A'
+            Result = ""
+        }
+        try {
+            $PDFReader = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $Path -ErrorAction Stop
+        }
+        catch {
+            $Obj = New-Object PSObject -Property $Props
+            $Obj.Result = "Failure-Document"
+        }
     }
     PROCESS {
 
         for ($Page = 1 ; $Page -le $PDFReader.NumberOfPages ; $Page++) {
+
             # Search for queried text
-            $PageText = [iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($PDFReader, $Page).Split([char]0x000A)
+            Try {
+                $PageText = [iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($PDFReader, $Page).Split([char]0x000A)
+            }
+            Catch {
+                $Obj = New-Object PSObject -Property $Props
+                $Obj.Result = "Failure-Search"
+                $Obj.Page = $Page
+                $Obj
+                break
+            }
             foreach ($Q in $Query) {
+                $Obj = New-Object PSObject -Property $Props
+                $Obj.Query = $Q
                 if ($PageText -match $Q) {
-                    $Props = [ordered]@{
-                        Name  = (Split-Path -Path $Path -Leaf)
-                        Query = $Q
-                        Path  = $Path
-                        Match = $true -as [bool]
-                    }
-                    $Obj = New-Object PSObject -Property $Props
+                    $Obj.Match = $true
+                    $Obj.Result = "Success"
                     $Obj
                     break
+                }
+                else {
+                    $Obj.Match = $false
+                    $Obj.Result = "Success"
+                    $Obj
                 }
             }
         }
