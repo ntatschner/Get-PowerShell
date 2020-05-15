@@ -89,6 +89,7 @@ function Search-PDFDoc {
             foreach ($Q in $Query) {
                 $Obj = New-Object PSObject -Property $Props
                 $Obj.Query = $Q
+                $Obj.Page = $Page
                 if ($PageText -match $Q) {
                     $Obj.Match = $true
                     $Obj.Result = "Success"
