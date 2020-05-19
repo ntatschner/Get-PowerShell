@@ -68,7 +68,9 @@ function Search-WordDoc {
 			Mandatory = $true)]
 		[string[]]$Query,
 		[Parameter(ParameterSetName = 'Match')]
-		[boolean]$MatchWildCard
+		[boolean]$MatchWildCard,
+		[switch]
+		$OnlyMatches = $true
 	)
 	
 	BEGIN {
@@ -130,9 +132,11 @@ function Search-WordDoc {
 				break
 			}
 			else {
-				$Obj.Match = $false
-				$Obj.Result = "Success"
-				$Obj
+				if ($OnlyMatches -eq $false) {
+					$Obj.Match = $false
+					$Obj.Result = "Success"
+					$Obj
+				}
 			}
 		}
 	}
