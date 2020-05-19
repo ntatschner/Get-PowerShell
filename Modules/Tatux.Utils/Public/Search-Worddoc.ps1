@@ -101,7 +101,7 @@ function Search-WordDoc {
 		catch {
 			Write-Error "Failed to open document $Path. Error: $($_.Exception.Message)"
 			$Obj = New-Object PSObject -Property $Props
-			$Obj.Results = "Failed-Document"
+			$Obj.Result = "Failed-Document"
 			break
 		}
 		$Range = $Document.content
@@ -117,7 +117,7 @@ function Search-WordDoc {
 				Write-Error "Failed to search document $Path. $($_.Exception.Message)"
 				$Obj = New-Object PSObject -Property $Props
 				$Obj.Query = $Q
-				$Obj.Results = "Failed-Document"
+				$Obj.Result = "Failed-Document"
 				$Obj
 				break
 			}
@@ -137,7 +137,7 @@ function Search-WordDoc {
 		}
 	}
 	END {
-		$document.close()
+		$document.close($false)
 		$application.quit()
 		
 		[System.Runtime.InteropServices.Marshal]::ReleaseComObject($Range) | Out-Null

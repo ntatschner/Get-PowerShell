@@ -72,7 +72,7 @@ function Search-ExcelDoc {
 		catch {
 			Write-Error "Failed to open $Path, Error: $($_.Exception.Message)"
 			$Obj = New-Object PSObject -Property $Props
-			$Obj.Results = "Failed-Document"
+			$Obj.Result = "Failed-Document"
 			break
 		}
 		$Sheets = $Workbooks.Sheets
@@ -88,7 +88,7 @@ function Search-ExcelDoc {
 					$Obj = New-Object PSObject -Property $Props
 					$Obj.Query = $Q
 					$Obj.Page = "Sheet: $($a.Name)"
-					$Obj.Results = "Failed-Document"
+					$Obj.Result = "Failed-Document"
 					$Obj
 					break
 				}
@@ -109,7 +109,7 @@ function Search-ExcelDoc {
 		}
 	}
 	END {
-		$application.quit()
+		$application.quit($False)
 		
 		[System.Runtime.InteropServices.Marshal]::ReleaseComObject($Workbooks) | Out-Null
 		
