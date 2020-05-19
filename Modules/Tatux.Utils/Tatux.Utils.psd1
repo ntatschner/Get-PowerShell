@@ -12,7 +12,7 @@
 RootModule = 'Tatux.Utils'
 
 # Version number of this module.
-ModuleVersion = '0.2.12'
+ModuleVersion = '0.2.13'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Added new function: Search-ExcelDoc'
+        ReleaseNotes = 'Added new function: Fixed Issie with Office doc search functions that closes without saving on docs that contain macros.'
 
         # External dependent modules of this module
         # ExternalModuleDependencies = ''
