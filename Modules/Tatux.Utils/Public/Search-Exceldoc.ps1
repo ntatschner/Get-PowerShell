@@ -109,7 +109,8 @@ function Search-ExcelDoc {
 		}
 	}
 	END {
-		$application.quit($False)
+		$Workbooks.Close($False)
+		$application.quit()
 		
 		[System.Runtime.InteropServices.Marshal]::ReleaseComObject($Workbooks) | Out-Null
 		
