@@ -12,7 +12,7 @@
 RootModule = 'Tatux.Utils'
 
 # Version number of this module.
-ModuleVersion = '0.2.13'
+ModuleVersion = '0.2.15'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()

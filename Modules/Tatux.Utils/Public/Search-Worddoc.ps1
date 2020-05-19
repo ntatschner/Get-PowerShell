@@ -96,7 +96,7 @@ function Search-WordDoc {
 	PROCESS {
 		# Open doc ready for searching
 		try {
-			$Document = $application.documents.open($Path)
+			$Document = $application.documents.open($Path, $true)
 		}
 		catch {
 			Write-Error "Failed to open document $Path. Error: $($_.Exception.Message)"

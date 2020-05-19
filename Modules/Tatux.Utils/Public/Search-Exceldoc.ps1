@@ -67,7 +67,7 @@ function Search-ExcelDoc {
 	PROCESS {
 		# Open doc ready for searching
 		try {
-			$Workbooks = $application.Workbooks.open($Path)
+			$Workbooks = $application.Workbooks.open($Path, $true)
 		}
 		catch {
 			Write-Error "Failed to open $Path, Error: $($_.Exception.Message)"
