@@ -43,7 +43,7 @@ function Search-ExcelDoc {
 		[string]$Path,
 		[string[]]$Query,
 		[switch]
-		$OnlyMatches = $true
+		$OnlyMatches
 	)
 	
 	BEGIN {

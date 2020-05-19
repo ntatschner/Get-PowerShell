@@ -70,7 +70,7 @@ function Search-WordDoc {
 		[Parameter(ParameterSetName = 'Match')]
 		[boolean]$MatchWildCard,
 		[switch]
-		$OnlyMatches = $true
+		$OnlyMatches
 	)
 	
 	BEGIN {
