@@ -74,21 +74,20 @@ function Search-PDFDoc {
         }
     }
     PROCESS {
+        # Search for queried text
 
-        for ($Page = 1 ; $Page -le $PDFReader.NumberOfPages ; $Page++) {
-
-            # Search for queried text
-            Try {
-                $PageText = [iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($PDFReader, $Page).Split([char]0x000A)
-            }
-            Catch {
-                $Obj = New-Object PSObject -Property $Props
-                $Obj.Result = "Failure-Search"
-                $Obj.Page = $Page
-                $Obj
-                break
-            }
-            foreach ($Q in $Query) {
+        foreach ($Q in $Query) {
+            for ($Page = 1 ; $Page -le $PDFReader.NumberOfPages ; $Page++) {
+                Try {
+                    $PageText = [iTextSharp.text.pdf.parser.PdfTextExtractor]::GetTextFromPage($PDFReader, $Page).Split([char]0x000A)
+                }
+                Catch {
+                    $Obj = New-Object PSObject -Property $Props
+                    $Obj.Result = "Failure-Search"
+                    $Obj.Page = $Page
+                    $Obj
+                    break
+                }
                 $Obj = New-Object PSObject -Property $Props
                 $Obj.Query = $Q
                 $Obj.Page = $Page
@@ -99,11 +98,14 @@ function Search-PDFDoc {
                     break
                 }
                 else {
+                    $Obj.Match = $false
                     if ($OnlyMatches -eq $false) {
-                        $Obj.Match = $false
                         $Obj.Result = "Success"
                         $Obj
                     }
+                }
+                if ($Obj.Result) {
+                    break
                 }
             }
         }

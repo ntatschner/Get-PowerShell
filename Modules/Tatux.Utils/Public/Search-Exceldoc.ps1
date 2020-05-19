@@ -80,8 +80,9 @@ function Search-ExcelDoc {
 		$Sheets = $Workbooks.Sheets
 		# Search for queried text
 		
-		foreach ($a in $Sheets) {
-			foreach ($Q in $Query) {
+
+		foreach ($Q in $Query) {
+			foreach ($a in $Sheets) {
 				try {
 					$QueryResults = $a.Cells.Find($Q)
 				}
@@ -104,13 +105,16 @@ function Search-ExcelDoc {
 					break
 				}
 				else {
+					$Obj.Match = $false
 					if ($OnlyMatches -eq $False) {
-						$Obj.Match = $false
 						$Obj.Result = "Success"
 						$Obj
 					}
 				}
 			}
+		}
+		if ($Obj.Result) {
+			break
 		}
 	}
 	END {
