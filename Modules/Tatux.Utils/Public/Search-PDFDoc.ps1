@@ -41,7 +41,9 @@ function Search-PDFDoc {
             })]
         [ValidateNotNullOrEmpty()]
         [string]$Path,
-        [string[]]$Query
+        [string[]]$Query,
+        [switch]
+        $OnlyMatches = $true
     )
 	
     BEGIN {
@@ -97,9 +99,11 @@ function Search-PDFDoc {
                     break
                 }
                 else {
-                    $Obj.Match = $false
-                    $Obj.Result = "Success"
-                    $Obj
+                    if ($OnlyMatches -eq $false) {
+                        $Obj.Match = $false
+                        $Obj.Result = "Success"
+                        $Obj
+                    }
                 }
             }
         }
