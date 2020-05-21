@@ -49,6 +49,7 @@ function Search-ExcelDoc {
 	BEGIN {
 		try {
 			$application = New-Object -comobject excel.application -ErrorAction Stop
+			$application.DisplayAlerts = $False
 		}
 		catch {
 			Write-Error "Failed to load Excel Com Object, make sure Microsoft Excel is installed."
