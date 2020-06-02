@@ -50,6 +50,7 @@ function Search-ExcelDoc {
 		try {
 			$application = New-Object -comobject excel.application -ErrorAction Stop
 			$application.DisplayAlerts = $False
+			$application.EnableEvents = $False
 		}
 		catch {
 			Write-Error "Failed to load Excel Com Object, make sure Microsoft Excel is installed."
@@ -112,10 +113,10 @@ function Search-ExcelDoc {
 						$Obj
 					}
 				}
+				if ($Obj.Result) {
+					continue
+				}
 			}
-		}
-		if ($Obj.Result) {
-			break
 		}
 	}
 	END {

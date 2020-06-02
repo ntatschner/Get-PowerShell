@@ -12,7 +12,7 @@
 RootModule = 'Tatux.Utils'
 
 # Version number of this module.
-ModuleVersion = '0.2.19'
+ModuleVersion = '0.2.22'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Added switch to office doc search functions to only display matches instead of everything.'
+        ReleaseNotes = 'Changed the breaking page query clause to a continue'
 
         # External dependent modules of this module
         # ExternalModuleDependencies = ''

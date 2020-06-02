@@ -105,7 +105,7 @@ function Search-PDFDoc {
                     }
                 }
                 if ($Obj.Result) {
-                    break
+                    continue
                 }
             }
         }
