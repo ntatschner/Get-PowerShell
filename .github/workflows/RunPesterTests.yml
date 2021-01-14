@@ -1,0 +1,25 @@
+name: RunPesterTests Tatux.Utils
+ 
+on:
+  # Triggers the workflow on push or pull request events but only for the master branch
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  # This workflow contains a single job called "build"
+  test-pwsh:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Run Pester tests
+      run: |
+        Set-PSRepository psgallery -InstallationPolicy trusted
+        Install-Module -Name Pester -RequiredVersion 5.0.4 -Confirm:$false -Force
+        Invoke-Pester -Path "/Modules/Tatux.Utils/Public/Tests"
+        Invoke-Pester -Path "/Modules/Tatux.Utils/Private/Tests"
+      shell: pwsh
