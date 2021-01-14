@@ -15,11 +15,11 @@ jobs:
   test-pwsh:
     runs-on: windows-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v1
     - name: Run Pester tests
       run: |
         Set-PSRepository psgallery -InstallationPolicy trusted
         Install-Module -Name Pester -RequiredVersion 5.0.4 -Confirm:$false -Force
-        Invoke-Pester -Path "$GITHUB_WORKSPACE/Modules/Tatux.Utils/Public/Tests"
-        Invoke-Pester -Path "$GITHUB_WORKSPACE/Modules/Tatux.Utils/Private/Tests"
+        Invoke-Pester -Path "$GITHUB_WORKSPACE\Modules\Tatux.Utils\Public\Tests"
+        Invoke-Pester -Path "$GITHUB_WORKSPACE\Modules\Tatux.Utils\Private\Tests"
       shell: pwsh
