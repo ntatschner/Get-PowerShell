@@ -20,7 +20,7 @@ jobs:
       run: |
         echo ${{ github.workspace }}
         Set-PSRepository psgallery -InstallationPolicy trusted
-        Install-Module -Name Pester,PSScriptAnalyzer -RequiredVersion 5.0.4 -Confirm:$false -Force
+        Install-Module -Name Pester,PSScriptAnalyzer -Confirm:$false -Force
         Invoke-Pester -Path "${{ github.workspace }}\Modules\Tatux.Utils\Public\Tests"
         Invoke-Pester -Path "${{ github.workspace }}\Modules\Tatux.Utils\Private\Tests"
       shell: pwsh
