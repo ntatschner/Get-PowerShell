@@ -90,10 +90,10 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 				$global:Destination = "$(Join-Path -Path $(Split-Path -Path $i.FullName -Parent) -ChildPath 'Tests')"
 				if ((Test-Path -Path $Destination) -eq $false) {
 					try {
-						New-Item -Path $Destination -ItemType Container
+						New-Item -Path $Destination -ItemType Container -ErrorAction 'Stop'
 					}
 					catch {
-						Write-Error "Failed to create default test folder 'Tests' in the source function directory $($i.Directory)."
+						Write-Error "Failed to create default test folder 'Tests' in the source function directory $($i.Directory). Error: $($_.exception.message)"
 						break
 					}
 				}

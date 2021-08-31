@@ -12,7 +12,7 @@
 RootModule = 'Tatux.Utils'
 
 # Version number of this module.
-ModuleVersion = '0.2.22'
+ModuleVersion = '0.2.23'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,7 +107,7 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Changed the breaking page query clause to a continue'
+        ReleaseNotes = 'Added PSScriptAnalyzer default file'
 
         # External dependent modules of this module
         # ExternalModuleDependencies = ''
