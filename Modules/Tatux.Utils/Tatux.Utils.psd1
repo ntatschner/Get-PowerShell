@@ -27,7 +27,7 @@ Author = 'Nigel Tatschner'
 CompanyName = 'Tatux Solutions'
 
 # Copyright statement for this module
-Copyright = '(c) 2020 . All rights reserved.'
+Copyright = '(c) 2021 . All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'A Set of utilities ive created to help with various tasks'
