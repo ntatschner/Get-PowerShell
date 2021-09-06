@@ -44,14 +44,16 @@ function New-NTPesterTests {
 			break
 		}
 		$PesterDefaultContent = @'
-$TestPath = Split-Path -Parent -Path (Split-Path -Path $MyInvocation.MyCommand.Path -Parent)
-$FunctionFileName = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
-$FunctionName = $FunctionFileName.Replace('.ps1', '')
-. "$TestPath\$FunctionFileName"
+BeforeAll {
+	$TestPath = Split-Path -Parent -Path (Split-Path -Path $MyInvocation.MyCommand.Path -Parent)
+	$FunctionFileName = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
+	$FunctionName = $FunctionFileName.Replace('.ps1', '')
+	. "$TestPath\$FunctionFileName"
 
-Describe "Performing basic validation test on function $FunctionFileName" {
-	Context "Function $FunctionFileName - Testing Command Output Object" {
-		# This is a template for the Pester Test, add any tests you want here
+	Describe "Performing basic validation test on function $FunctionFileName" {
+		Context "Function $FunctionFileName - Testing Command Output Object" {
+			# This is a template for the Pester Test, add any tests you want here
+		}
 	}
 }
 Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
@@ -87,13 +89,13 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 		foreach ($i in $Files) {
 			if ([system.string]::IsNullOrEmpty($Destination)) {
 				# if destination path is not specified, create the files in a directory called Tests in the source function path and create the tests there.
-				$global:Destination = "$(Join-Path -Path $(Split-Path -Path $i.FullName -Parent) -ChildPath 'Tests')"
+				$script:Destination = Join-Path -Path $(Split-Path -Path $i.FullName -Parent) -ChildPath 'Tests'
 				if ((Test-Path -Path $Destination) -eq $false) {
 					try {
 						New-Item -Path $Destination -ItemType Container -ErrorAction 'Stop'
 					}
 					catch {
-						Write-Error "Failed to create default test folder 'Tests' in the source function directory $($i.Directory). Error: $($_.exception.message)"
+						Write-Error "Failed to create default test folder 'Tests' in the source function directory $($i.Directory). Error: $($_.exception.message) on line $($_.Exception.Line)"
 						break
 					}
 				}
