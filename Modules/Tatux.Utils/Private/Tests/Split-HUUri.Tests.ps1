@@ -25,7 +25,7 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 		    {
 			    It "Function $FunctionFileName should pass $Rule" {
 				    $Failures = $AnalyzerIssues | Where-Object -Property RuleName -EQ -Value $rule
-				    ($Failures | Measure-Object).Count | Should Be 0
+				    ($Failures | Measure-Object).Count | Should -Be 0
 			    }
 		    }
 		    else
@@ -33,7 +33,7 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 			    # We still want it in the tests, but since it doesn't actually get tested we will skip
 			    It "Function $FunctionFileName should pass $Rule" -Skip {
 				    $Failures = $AnalyzerIssues | Where-Object -Property RuleName -EQ -Value $rule
-				    ($Failures | Measure-Object).Count | Should Be 0
+				    ($Failures | Measure-Object).Count | Should -Be 0
 			    }
 		    }
 		
