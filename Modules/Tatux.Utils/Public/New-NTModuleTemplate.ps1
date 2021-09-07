@@ -1,4 +1,4 @@
-	<#
+<#
     .SYNOPSIS
     Generate module scaffolding and boilerplate.
 
@@ -101,7 +101,7 @@ function New-NTModuleTemplate {
 
 			if ($UncommentConfig) {
 				(Get-Content $Module) -Replace ('\#\.\s', '. ') |
-		  		Set-Content "$Path\$Name\$Name.psm1"
+				Set-Content "$Path\$Name\$Name.psm1"
 			}
 			else {
 				Copy-Item $Module "$Path\$Name\$Name.psm1"
@@ -113,7 +113,6 @@ function New-NTModuleTemplate {
 
 			$Params = @{
 				Path              = "$Path\$Name\$Name.psd1"
-				RootModule        = $Name
 				Author            = $Author
 				Copyright         = "(c) $(Get-Date -Uformat %Y) $Author. All rights reserved."
 				CompanyName       = $CompanyName
@@ -123,6 +122,7 @@ function New-NTModuleTemplate {
 				AliasesToExport   = '*'
 				VariablesToExport = '*'
 				CmdletsToExport   = '*'
+				NestedModules     = "$Name.psm1"
 			}
 			New-ModuleManifest @Params
 			Write-Verbose "Generated $Module manifest at $Path\$Name\$Name.psd1."
