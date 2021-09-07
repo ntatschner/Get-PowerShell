@@ -27,8 +27,10 @@ function New-NTPesterTests {
 
 	BEGIN {
 		# Get source type
+		$Source = Get-Item $Source
 		if ((Get-ItemProperty -Path $Source).Attributes -eq 'Directory') {
 			$Files = Get-ChildItem -Path $Source | Where-Object name -Like "*.ps1"
+			Write-Verbose "Found $($Files.count) files"
 		}
 		else {
 			if ($Source -like "*.ps1") {
@@ -86,11 +88,12 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 '@	
 	}
 	PROCESS {
-		foreach ($i in $Files) {
-			if ([system.string]::IsNullOrEmpty($Destination)) {
+		foreach ($i in $Files) {			
+			if ([System.String]::IsNullOrEmpty($Destination)) {
 				# if destination path is not specified, create the files in a directory called Tests in the source function path and create the tests there.
-				$script:Destination = Join-Path -Path $(Split-Path -Path $i.FullName -Parent) -ChildPath 'Tests'
-				if ((Test-Path -Path $Destination) -eq $false) {
+				$Destination = $(Join-Path -Path $(Split-Path -Path $($i.FullName) -Parent) -ChildPath 'Tests')
+				Write-Verbose "Writing files to $Destination"
+				if ($(Test-Path -Path $Destination -PathType Container) -eq $false) {
 					try {
 						New-Item -Path $Destination -ItemType Container -ErrorAction 'Stop'
 					}
@@ -114,17 +117,18 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 						New-Item -ItemType File -Path $NewFilePathandName -Value $PesterDefaultContent -ErrorAction Stop
 					}
 					catch {
-						Write-Error "Failed to create new test file, Error: $($_.Exception.Message)"
+						Write-Error "Failed to create new test file, Error: $($_.Exception.Message) on line $($_.Exception.Line)"
+						break
 					}
 				}
 				catch {
-					Write-Error "Failed to create destination path, Error: $($_.Exception.Message)"
+					Write-Error "Failed to create user defined destination path, Error: $($_.Exception.Message) on line $($_.Exception.Line)"
 					break
 				}
 			}
 		}
 		# Create PSScriptAnalyzerSettings.psd1 file if none exits in destination test folder
-$PSScriptAnalyzerDefault= @'
+		$PSScriptAnalyzerDefault = @'
 @{
 # Limit tests to Warning or Error
 Severity=@('Error','Warning')
