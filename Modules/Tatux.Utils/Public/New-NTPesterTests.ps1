@@ -12,7 +12,7 @@
 		The path you'd like the new test file(s) to be created, this defaults to a "Test" folder in the same path as the source functions. 
 	
 	.EXAMPLE
-		PS C:\> New-AMTPesterTests
+		PS C:\> New-NTPesterTests
 	
 #>
 function New-NTPesterTests {
@@ -20,14 +20,14 @@ function New-NTPesterTests {
 	param
 	(
 		[ValidateNotNullOrEmpty()]
-		[string]$Source = '.',
+		[string]$Source = $PWD.Path,
 		[ValidateNotNullOrEmpty()]
-		[string]$Destination
+		[string]$Destination = $(Join-Path -Path $($(Get-Item $Source).FullName) -ChildPath 'Tests')
 	)
 
 	BEGIN {
 		# Get source type
-		$Source = Get-Item $Source
+		$Source = $(Get-Item $Source).FullName
 		if ((Get-ItemProperty -Path $Source).Attributes -eq 'Directory') {
 			$Files = Get-ChildItem -Path $Source | Where-Object name -Like "*.ps1"
 			Write-Verbose "Found $($Files.count) files"
@@ -63,7 +63,7 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 		$ScriptAnalyzerSettings = Get-Content -Path $(Join-Path -Path $($PSScriptRoot) -ChildPath 'PSScriptAnalyzerSettings.psd1') | Out-String | Invoke-Expression
 		$AnalyzerIssues = Invoke-ScriptAnalyzer -Path "$TestPath\$FunctionFileName"
 		$ScriptAnalyzerRuleNames = Get-ScriptAnalyzerRule | Select-Object -ExpandProperty RuleName
-		forEach ($Rule in $ScriptAnalyzerRuleNames)
+		foreach ($Rule in $ScriptAnalyzerRuleNames)
 		{
 			if ($ScriptAnalyzerSettings.excluderules -notcontains $Rule)
 			{
@@ -91,7 +91,7 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 		foreach ($i in $Files) {			
 			if ([System.String]::IsNullOrEmpty($Destination)) {
 				# if destination path is not specified, create the files in a directory called Tests in the source function path and create the tests there.
-				$Destination = $(Join-Path -Path $(Split-Path -Path $($i.FullName) -Parent) -ChildPath 'Tests')
+				$Global:Destination = $(Join-Path -Path $(Split-Path -Path $($i.FullName) -Parent) -ChildPath 'Tests')
 				Write-Verbose "Writing files to $Destination"
 				if ($(Test-Path -Path $Destination -PathType Container) -eq $false) {
 					try {
@@ -101,18 +101,20 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 						Write-Error "Failed to create default test folder 'Tests' in the source function directory $($i.Directory). Error: $($_.exception.message) on line $($_.Exception.Line)"
 						break
 					}
+				} else {
+					Write-Verbose "Destination path already exists"
 				}
 			}
 			else {
 				try {
-					if (Test-Path -Path $Destination -IsValid) {
+					if ($(Test-Path -Path $Destination -IsValid) -and $($(Test-Path -PathType Container -Path $Destination) -eq $false)) {
 						New-Item -ItemType Container -Path $Destination -ErrorAction Stop
 					}
-					else {
+					elseif ($(Test-Path -Path $Destination -IsValid) -eq $false) {
 						Write-Error "Please enter a valid destination path."
 						break
 					}
-					$NewFilePathandName = Join-Path -Path $DestinationPath -ChildPath "$($i.BaseName).Tests.ps1"
+					$NewFilePathandName = Join-Path -Path $Destination -ChildPath "$($i.BaseName).Tests.ps1"
 					try {
 						New-Item -ItemType File -Path $NewFilePathandName -Value $PesterDefaultContent -ErrorAction Stop
 					}
@@ -123,6 +125,7 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 				}
 				catch {
 					Write-Error "Failed to create user defined destination path, Error: $($_.Exception.Message) on line $($_.Exception.Line)"
+					$_
 					break
 				}
 			}
@@ -137,12 +140,12 @@ ExcludeRules=@('PSAvoidUsingInvokeExpression')
 }
 '@
 		try {
-			if ($(Test-Path -Path "$Destination\PSScriptAnalyzerSettings.psd1") -eq $false) {
-				New-Item -Path "$Destination\PSScriptAnalyzerSettings.psd1" -Value $PSScriptAnalyzerDefault -ItemType file -ErrorAction
+			if ($(Test-Path -Path $(Join-Path -Path $Destination -ChildPath 'PSScriptAnalyzerSettings.psd1')) -eq $false) {
+				New-Item -Path $(Join-Path -Path $Destination -ChildPath 'PSScriptAnalyzerSettings.psd1') -Value $PSScriptAnalyzerDefault -ItemType file -ErrorAction 'Stop'
 			}
 		}
 		catch {
-			Write-Error "Failed to create the file $Destination\PSScriptAnalyzerSettings.psd1"
+			Write-Error "Failed to create the file $(Join-Path -Path $Destination -ChildPath 'PSScriptAnalyzerSettings.psd1')"
 		}
 		
 	}
