@@ -21,6 +21,6 @@ jobs:
         echo ${{ github.workspace }}
         Set-PSRepository psgallery -InstallationPolicy trusted
         Install-Module -Name Pester,PSScriptAnalyzer -Confirm:$false -Force
-        Invoke-Pester -Path "${{ github.workspace }}\Modules\Tatux.Utils\Public\Tests" -Output Detailed
-        Invoke-Pester -Path "${{ github.workspace }}\Modules\Tatux.Utils\Private\Tests" Output Detailed
+        Invoke-Pester -Path "${{ github.workspace }}\Modules\Tatux.Utils\Public\Tests" -Passthru
+        Invoke-Pester -Path "${{ github.workspace }}\Modules\Tatux.Utils\Private\Tests" -Passthru
       shell: pwsh
