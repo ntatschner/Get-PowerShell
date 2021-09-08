@@ -47,10 +47,11 @@ function New-NTPesterTests {
 		}
 		$PesterDefaultContent = @'
 BeforeAll {
-	$TestPath = Split-Path -Parent -Path (Split-Path -Path $MyInvocation.MyCommand.Path -Parent)
-	$FunctionFileName = (Split-Path -Leaf $MyInvocation.MyCommand.Path) -replace '\.Tests\.', '.'
+	$TestPath = Split-Path -Parent -Path $PSScriptRoot
+	$FunctionFileName = (Split-Path -Leaf $PSCommandPath ) -replace '\.Tests\.', '.'
 	$FunctionName = $FunctionFileName.Replace('.ps1', '')
-	. "$TestPath\$FunctionFileName"
+	
+	. $(Join-Path -Path $TestPath -ChildPath $FunctionFileName)
 
 	Describe "Performing basic validation test on function $FunctionFileName" {
 		Context "Function $FunctionFileName - Testing Command Output Object" {
