@@ -12,7 +12,7 @@
 #RootModule = 'Tatux.Utils'
 
 # Version number of this module.
-ModuleVersion = '0.2.24'
+ModuleVersion = '0.2.25'
 
 # ID used to uniquely identify this module
 GUID = '061256e7-9e17-4571-9481-baca2e0bc13e'
@@ -51,7 +51,7 @@ PrivateData = @{
 
     PSData = @{
         # ReleaseNotes of this module
-        ReleaseNotes = 'Added PSScriptAnalyzer default file'
+        ReleaseNotes = 'Updated to pester version 5 syntax'
     } # End of PSData hashtable
 
 } # End of PrivateData hashtable
