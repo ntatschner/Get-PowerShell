@@ -12,6 +12,7 @@
 		The path you'd like the new test file(s) to be created, this defaults to a "Test" folder in the same path as the source functions. 
 	
 	.EXAMPLE
+		This command looks for .ps1 files in the current folder and outputs the new test files to a sub directory called 'Tests'
 		PS C:\> New-NTPesterTests
 	
 #>
@@ -20,9 +21,20 @@ function New-NTPesterTests {
 	param
 	(
 		[ValidateNotNullOrEmpty()]
-		[string]$Source = $PWD.Path,
+		[Alias('Path')]
+		[PSDefaultValue(Help = 'The current working directory')]
+		[ValidateScript( {
+				if ( -Not ($_ | Test-Path) ) {
+					throw "File or folder does not exist"
+				}
+				return $true
+			})]
+		[System.IO.FileInfo]
+		$Source = $PWD.Path,
 		[ValidateNotNullOrEmpty()]
-		[string]$Destination = $(Join-Path -Path $($(Get-Item $Source).FullName) -ChildPath 'Tests')
+		[PSDefaultValue(Help = 'The default is Test under the source directory')]
+		[string]
+		$Destination = $(Join-Path -Path $($(Get-Item $Source).FullName) -ChildPath 'Tests')
 	)
 
 	BEGIN {
@@ -49,6 +61,7 @@ function New-NTPesterTests {
 BeforeAll {
 	$TestPath = Split-Path -Parent -Path $PSScriptRoot
 	$FunctionFileName = (Split-Path -Leaf $PSCommandPath ) -replace '\.Tests\.', '.'
+	# You can use this Variable to call your function via it's name or ignore/remove as required
 	$FunctionName = $FunctionFileName.Replace('.ps1', '')
 	
 	. $(Join-Path -Path $TestPath -ChildPath $FunctionFileName)
@@ -102,17 +115,25 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 						Write-Error "Failed to create default test folder 'Tests' in the source function directory $($i.Directory). Error: $($_.exception.message) on line $($_.Exception.Line)"
 						break
 					}
-				} else {
+				}
+				else {
 					Write-Verbose "Destination path already exists"
 				}
 			}
 			else {
 				try {
-					if ($(Test-Path -Path $Destination -IsValid) -and $($(Test-Path -PathType Container -Path $Destination) -eq $false)) {
+					if ($($(Test-Path -PathType Container -Path $Destination) -eq $false) -and $($_ -Match "^[c-z]:\\|[/]+[a-zA-Z]+[\\/]?$")) {
+						New-Item -ItemType Container -Path $Destination -ErrorAction Stop
+					}
+					elseif ($($_ -NotMatch "^[c-z]:\\|[/]+[a-zA-Z]+[\\/]?$") -and $(Test-Path -Path $Destination -IsValid) -and
+					 $($Destination -ne $(Join-Path -Path $($(Get-Item $Source).FullName) -ChildPath 'Tests'))) {
 						New-Item -ItemType Container -Path $Destination -ErrorAction Stop
 					}
 					elseif ($(Test-Path -Path $Destination -IsValid) -eq $false) {
 						Write-Error "Please enter a valid destination path."
+						break
+					} else {
+						Write-Error "Failed to vailidate destination path. Error: $($_.Exception.Message)"
 						break
 					}
 					$NewFilePathandName = Join-Path -Path $Destination -ChildPath "$($i.BaseName).Tests.ps1"
@@ -126,7 +147,6 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 				}
 				catch {
 					Write-Error "Failed to create user defined destination path, Error: $($_.Exception.Message) on line $($_.Exception.Line)"
-					$_
 					break
 				}
 			}
