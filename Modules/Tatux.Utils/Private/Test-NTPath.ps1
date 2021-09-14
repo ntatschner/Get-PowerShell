@@ -23,11 +23,16 @@ function Test-NTPath
 		[Parameter(Mandatory = $true,
 				   ValueFromPipeline = $true,
 				   ValueFromPipelineByPropertyName = $true)]
+<<<<<<< HEAD
 		[string[]]$Path
+=======
+		[string]$Path
+>>>>>>> 858f1bbdfc54a6780a3780dc594324d73a01beab
 	)
 	
 	Begin
 	{
+<<<<<<< HEAD
 		if ($MyInvocation.ExpectingInput)
 		{
 			$Path = $_
@@ -57,6 +62,19 @@ function Test-NTPath
 					break
 				}
 				Default { Write-Error "Failed to determin path type."}
+=======
+		$Path
+	}
+	Process
+	{
+		foreach ($i in $_)
+		{
+			switch -regex ($i)
+			{
+				
+				
+				Default { }
+>>>>>>> 858f1bbdfc54a6780a3780dc594324d73a01beab
 			}
 		}
 		
