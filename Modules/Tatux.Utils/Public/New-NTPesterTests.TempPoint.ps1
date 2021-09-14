@@ -9,14 +9,12 @@
 		Source of function(s) to create the pester tests for, can be a single file or folder
 	
 	.PARAMETER Destination
-		The path you'd like the new test file(s) to be created, this defaults to a "Test" folder in the same path as the source functions.
+		The path you'd like the new test file(s) to be created, this defaults to a "Test" folder in the same path as the source functions. 
 	
 	.EXAMPLE
 		This command looks for .ps1 files in the current folder and outputs the new test files to a sub directory called 'Tests'
 		PS C:\> New-NTPesterTests
 	
-	.NOTES
-		Additional information about the function.
 #>
 function New-NTPesterTests {
 	[CmdletBinding()]
