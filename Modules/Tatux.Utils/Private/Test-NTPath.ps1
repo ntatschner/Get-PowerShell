@@ -23,22 +23,40 @@ function Test-NTPath
 		[Parameter(Mandatory = $true,
 				   ValueFromPipeline = $true,
 				   ValueFromPipelineByPropertyName = $true)]
-		[string]$Path
+		[string[]]$Path
 	)
 	
 	Begin
 	{
-		$Path
+		if ($MyInvocation.ExpectingInput)
+		{
+			$Path = $_
+		}
 	}
 	Process
 	{
-		foreach ($i in $_)
+		foreach ($i in $Path)
 		{
+			$i
 			switch -regex ($i)
 			{
-				
-				
-				Default { }
+				"^(([c-z]:\\)|\/)((\\ \/)?[\w.-]*(\\|\/)?)+" {
+					$true
+					break
+				}
+				"^[a-zA-Z_\-\.]*$" {
+					$false
+					break
+				}
+				"^[a-zA-Z_\-\.\/]*$" {
+					$false
+					break
+				}
+				"^[a-zA-Z_\-\.\\]*$" {
+					$false
+					break
+				}
+				Default { Write-Error "Failed to determin path type."}
 			}
 		}
 		
