@@ -9,12 +9,12 @@
 		The Path to check
 	
 	.EXAMPLE
-				PS C:\> Test-NTPath -Path 'Value1'
+				PS C:\> Test-NTValidPath -Path 'Value1'
 	
 	.NOTES
 		Additional information about the function.
 #>
-function Test-NTPath
+function Test-NTValidPath
 {
 	[CmdletBinding()]
 	[OutputType([bool])]
