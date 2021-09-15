@@ -37,7 +37,6 @@ function Test-NTValidPath
 	{
 		foreach ($i in $Path)
 		{
-			$i
 			switch -regex ($i)
 			{
 				"^(([c-z]:\\)|\/)((\\ \/)?[\w.-]*(\\|\/)?)+" {

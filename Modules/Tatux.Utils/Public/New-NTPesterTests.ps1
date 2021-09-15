@@ -138,7 +138,7 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 						$($_ -Match "^(([c-z]:\\)|\/)((\\|\/)?[\w.-]*(\\|\/)?)+")) {
 							New-Item -ItemType Container -Path $Destination -ErrorAction Stop
 						}
-						elseif ($(-not $($_ | Select-String -Pattern "^(([c-z]:\\)|\/)((\\|\/)?[\w.-]*(\\|\/)?)+")) -and $(Test-Path -Path $Destination -IsValid) -and
+						elseif ($(-not $($_ | Select-String -Pattern "^(([c-z]:\\)|\/)((\\|\/)?[\w.-]*(\\|\/)?)+")) -and $(Test-NTValidPath -Path $Destination) -and
 						 $($Destination -ne $(Join-Path -Path $($(Get-Item $Source).FullName) -ChildPath 'Tests'))) {
 							 '2'
 							New-Item -ItemType Container -Path $Destination -ErrorAction Stop
