@@ -47,12 +47,13 @@ function Search-PDFDoc {
     )
 	
     BEGIN {
-        $FunctionPath = Split-Path -Path $PSCommandPath -Parent
+        $FunctionPath = $(Join-Path -Path $(Split-Path -Path $PSCommandPath -Parent) -ChildPath "Dependencies")
         try {
-            Add-Type -Path "$FunctionPath\itextsharp.dll" -ErrorAction SilentlyContinue
+            Add-Type -Path "$FunctionPath\itextsharp.dll" -ErrorAction Stop
             Write-Verbose "Class itextsharp.dll loaded."
         }
         catch {
+            $_
             Write-Verbose "Class itextsharp.dll already loaded."
         }
         #Load File
@@ -67,6 +68,10 @@ function Search-PDFDoc {
         }
         try {
             $PDFReader = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $Path -ErrorAction Stop
+            if ($PSBoundParameters.ContainsKey("Verbose")) {
+                Write-Output "PDF details from reader:`n"
+                $PDFReader
+            }
         }
         catch {
             $Obj = New-Object PSObject -Property $Props
