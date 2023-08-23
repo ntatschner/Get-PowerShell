@@ -12,7 +12,7 @@
 #RootModule = 'Tatux.Utils'
 
 # Version number of this module.
-ModuleVersion = '0.2.25'
+ModuleVersion = '0.2.26'
 
 # ID used to uniquely identify this module
 GUID = '061256e7-9e17-4571-9481-baca2e0bc13e'
@@ -24,7 +24,7 @@ Author = 'Nigel Tatschner'
 CompanyName = 'Tatux Solutions'
 
 # Copyright statement for this module
-Copyright = '(c) 2021 . All rights reserved.'
+Copyright = '(c) 2023 . All rights reserved.'
 
 # Description of the functionality provided by this module
 Description = 'A Set of utilities ive created to help with various tasks'
@@ -51,7 +51,7 @@ PrivateData = @{
 
     PSData = @{
         # ReleaseNotes of this module
-        ReleaseNotes = 'Updated to pester version 5 syntax'
+        ReleaseNotes = 'Fixed Search-PDFDoc function'
     } # End of PSData hashtable
 
 } # End of PrivateData hashtable
