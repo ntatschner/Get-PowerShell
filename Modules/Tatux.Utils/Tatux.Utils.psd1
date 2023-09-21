@@ -12,7 +12,7 @@
 #RootModule = 'Tatux.Utils'
 
 # Version number of this module.
-ModuleVersion = '0.2.26'
+ModuleVersion = '0.2.27'
 
 # ID used to uniquely identify this module
 GUID = '061256e7-9e17-4571-9481-baca2e0bc13e'
@@ -51,7 +51,7 @@ PrivateData = @{
 
     PSData = @{
         # ReleaseNotes of this module
-        ReleaseNotes = 'Fixed Search-PDFDoc function'
+        ReleaseNotes = 'Added line reference and return value to output of Search-PDFDoc'
     } # End of PSData hashtable
 
 } # End of PrivateData hashtable
