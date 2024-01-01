@@ -12,7 +12,7 @@
 		Resolves the remote hosts DNS name if possible
 	
 	.PARAMETER IgnoreLoopback
-		Displays only locally assigend address connection info
+		Displays only locally assigned address connection info
 	
 	.PARAMETER ComputerName
 		A remote host to run the command on
@@ -74,7 +74,7 @@ function Get-NTTCPConnectionInfo {
 				if ($ResolveAddress) { 
 					$MainProps = $MainProps + $ExecutableProps
 					try {
-						NETSTAT -p tcp -f -o | ForEach-Object -Process {
+						netstat -p tcp -o -f | ForEach-Object -Process {
 							if ([string]::IsNullOrEmpty($_)) { continue }
 							$NTTCPObj = New-Object system.collections.arraylist
 							$_.split('') | Foreach-Object -Process {
@@ -103,7 +103,7 @@ function Get-NTTCPConnectionInfo {
 				else {
 					$MainProps = $MainProps + $ExecutableProps
 					try {
-						NETSTAT -p tcp -o | ForEach-Object -Process {
+						netstat -p tcp -o | ForEach-Object -Process {
 							if ([string]::IsNullOrEmpty($_)) { continue }
 							$NTTCPObj = New-Object system.collections.arraylist
 							$_.split('') | Foreach-Object -Process {
@@ -133,7 +133,7 @@ function Get-NTTCPConnectionInfo {
 			"Default" {
 				if ($ResolveAddress) {
 					try {
-						NETSTAT -p tcp -f | ForEach-Object -Process {
+						netstat -p tcp -f | ForEach-Object -Process {
 							if ([string]::IsNullOrEmpty($_)) { continue }
 							$NTTCPObj = New-Object system.collections.arraylist
 							$_.split('') | Foreach-Object -Process {
@@ -155,8 +155,7 @@ function Get-NTTCPConnectionInfo {
 				}
 				else {
 					try {
-						$netstatoutput = $(NETSTAT -p tcp)
-						$netstatoutput | ForEach-Object -Process {
+						netstat -p tcp | ForEach-Object -Process {
 							if ([string]::IsNullOrEmpty($_)) { continue }
 							$NTTCPObj = New-Object system.collections.arraylist
 							$_.split('') | Foreach-Object -Process {
