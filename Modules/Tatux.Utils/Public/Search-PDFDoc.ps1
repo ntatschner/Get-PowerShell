@@ -47,30 +47,38 @@ function Search-PDFDoc {
     )
 	
     BEGIN {
-        $FunctionPath = Split-Path -Path $PSCommandPath -Parent
+        $FunctionPath = $(Join-Path -Path $(Split-Path -Path $PSCommandPath -Parent) -ChildPath "Dependencies")
         try {
-            Add-Type -Path "$FunctionPath\itextsharp.dll" -ErrorAction SilentlyContinue
+            Add-Type -Path "$FunctionPath\itextsharp.dll" -ErrorAction Stop
             Write-Verbose "Class itextsharp.dll loaded."
         }
         catch {
+            $_
             Write-Verbose "Class itextsharp.dll already loaded."
         }
         #Load File
         $Props = [ordered]@{
-            Name   = (Split-Path -Path $Path -Leaf)
-            Type   = (Split-Path -Path $Path -Leaf).Split('.')[-1]
-            Query  = 'N/A'
-            Page   = 'N/A'
-            Path   = $Path
-            Match  = 'N/A'
-            Result = ""
+            Name     = (Split-Path -Path $Path -Leaf)
+            Type     = (Split-Path -Path $Path -Leaf).Split('.')[-1]
+            Query    = 'N/A'
+            Page     = 'N/A'
+            Line     = 'N/A'
+            LineText = 'N/A'
+            Path     = $Path
+            Match    = 'N/A'
+            Result   = ""
         }
         try {
             $PDFReader = New-Object iTextSharp.text.pdf.pdfreader -ArgumentList $Path -ErrorAction Stop
+            if ($PSBoundParameters.ContainsKey("Verbose")) {
+                Write-Output "PDF details from reader:`n"
+                $PDFReader
+            }
         }
         catch {
             $Obj = New-Object PSObject -Property $Props
-            $Obj.Result = "Failure-Document"
+            $Obj.Query = $Query
+            $Obj.Result = "Failure-Document: $($_.Exception.Message)"
         }
     }
     PROCESS {
@@ -83,29 +91,36 @@ function Search-PDFDoc {
                 }
                 Catch {
                     $Obj = New-Object PSObject -Property $Props
-                    $Obj.Result = "Failure-Search"
+                    $Obj.Result = "Failure-Search: $($_.Exception.Message)"
+                    $Obj.Query = $Q
                     $Obj.Page = $Page
                     $Obj
                     break
                 }
-                $Obj = New-Object PSObject -Property $Props
-                $Obj.Query = $Q
-                $Obj.Page = $Page
-                if ($PageText -match $Q) {
-                    $Obj.Match = $true
-                    $Obj.Result = "Success"
-                    $Obj
-                    break
-                }
-                else {
-                    $Obj.Match = $false
-                    if ($OnlyMatches -eq $false) {
+                $LineCount = 1
+                foreach ($line in $PageText) {
+                    $Obj = New-Object PSObject -Property $Props
+                    $Obj.Query = $Q
+                    $Obj.Page = $Page
+                    $Obj.Line = $LineCount
+                    $LineCount++
+                    if ($line -match $Q) {
+                        $Obj.LineText = $line
+                        $Obj.Match = $true
                         $Obj.Result = "Success"
                         $Obj
+                        break
                     }
-                }
-                if ($Obj.Result) {
-                    continue
+                    else {
+                        $Obj.Match = $false
+                        if ($OnlyMatches -eq $false) {
+                            $Obj.Result = "Success"
+                            $Obj
+                        }
+                    }
+                    if ($Obj.Result) {
+                        continue
+                    }
                 }
             }
         }

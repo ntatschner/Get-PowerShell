@@ -1,5 +1,5 @@
 #region get public and private function definition files.
-$Public  = @(
+$Public = @(
     Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue
 )
 $Private = @(
@@ -11,9 +11,10 @@ $Private = @(
 foreach ($Function in @($Public + $Private)) {
     $FunctionPath = $Function.fullname
     try {
-	. $FunctionPath # dot source function
-    } catch {
-	Write-Error -Message "Failed to import function at $($FunctionPath): $_"
+        . $FunctionPath # dot source function
+    }
+    catch {
+        Write-Error -Message "Failed to import function at $($FunctionPath): $_"
     }
 }
 #endregion

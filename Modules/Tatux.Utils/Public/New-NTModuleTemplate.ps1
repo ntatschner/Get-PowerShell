@@ -147,7 +147,6 @@ function New-NTModuleTemplate {
 	
 			$Params = @{
 				Path              = "$Path\$Name\$Name.psd1"
-				RootModule        = $Name
 				Author            = $Author
 				Copyright         = "(c) $(Get-Date -Uformat %Y) $Author. All rights reserved."
 				CompanyName       = $CompanyName
@@ -157,6 +156,7 @@ function New-NTModuleTemplate {
 				AliasesToExport   = '*'
 				VariablesToExport = '*'
 				CmdletsToExport   = '*'
+				NestedModules     = "$Name.psm1"
 			}
 			New-ModuleManifest @Params
 			Write-Verbose "Generated $Module manifest at $Path\$Name\$Name.psd1."

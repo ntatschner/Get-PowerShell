@@ -1,12 +1,11 @@
-function New-NTModuleTemplate {
-	<#
+<#
     .SYNOPSIS
     Generate module scaffolding and boilerplate.
 
     .DESCRIPTION
     Creates the following:
 
-    - Public, Private, Tests & Classes directories for storing module functions.
+    - Public, Private & Classes directories for storing module functions.
 
     - A psm1 script that dot sources functions from Public & Private, but exports
       only those in Public.
@@ -56,8 +55,9 @@ function New-NTModuleTemplate {
 	Description = "This module will rock your world!"
 	RequiredModules = 'All','My','Other','Modules'
     }
-    New-ModuleTemplate @Params
+    New-NTModuleTemplate @Params
     #>
+function New-NTModuleTemplate {
 	[CmdletBinding()]
 	Param (
 		[Parameter(Mandatory, ValueFromPipeline)]
@@ -71,11 +71,7 @@ function New-NTModuleTemplate {
 	)
 
 	begin {
-		if ((Test-Path -Path $PSScriptRoot\Templates) -eq $false) {
-			Write-Warning "Make sure to download the Templates folder with the function and place it in the same directory as the function."
-			break
-		}
-		$Templates = "$PSScriptRoot\Templates"
+		$Templates = "$PSScriptRoot\..\Templates"
 		$Module = "$Templates\Module.psm1"
 		$Config = "$Templates\Config.ps1"
 		$Colors = "$Templates\Colors.ps1"
@@ -92,7 +88,7 @@ function New-NTModuleTemplate {
 				'Private\Tests'
 			)
 			foreach ($Directory in $Directories) {
-				New-Item -Name "$Path\$Name\$Directory" -ItemType Container
+				New-Item -Name "$Path\$Name\$Directory" -ItemType 'Container'
 				Set-Content -Value "# $Name $Directory Functions" -Path "$Path\$Name\$Directory\README.md"
 				Write-Verbose "Generated $Path\$Name\$Directory."
 			}
@@ -105,7 +101,7 @@ function New-NTModuleTemplate {
 
 			if ($UncommentConfig) {
 				(Get-Content $Module) -Replace ('\#\.\s', '. ') |
-		  Set-Content "$Path\$Name\$Name.psm1"
+				Set-Content "$Path\$Name\$Name.psm1"
 			}
 			else {
 				Copy-Item $Module "$Path\$Name\$Name.psm1"
@@ -117,7 +113,6 @@ function New-NTModuleTemplate {
 
 			$Params = @{
 				Path              = "$Path\$Name\$Name.psd1"
-				RootModule        = $Name
 				Author            = $Author
 				Copyright         = "(c) $(Get-Date -Uformat %Y) $Author. All rights reserved."
 				CompanyName       = $CompanyName
@@ -127,6 +122,7 @@ function New-NTModuleTemplate {
 				AliasesToExport   = '*'
 				VariablesToExport = '*'
 				CmdletsToExport   = '*'
+				NestedModules     = "$Name.psm1"
 			}
 			New-ModuleManifest @Params
 			Write-Verbose "Generated $Module manifest at $Path\$Name\$Name.psd1."

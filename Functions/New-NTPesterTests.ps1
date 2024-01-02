@@ -34,28 +34,19 @@ function New-NTPesterTests {
 		[ValidateNotNullOrEmpty()]
 		[PSDefaultValue(Help = 'The default is Test under the source directory')]
 		[string]
-		$Destination
+		$Destination = $(Join-Path -Path $($(Get-Item $Source).FullName) -ChildPath 'Tests')
 	)
 
 	BEGIN {
 		# Get source type
 		$Source = $(Get-Item $Source).FullName
 		if ((Get-ItemProperty -Path $Source).Attributes -eq 'Directory') {
-			$SourceIsFolder = $true
 			$Files = Get-ChildItem -Path $Source | Where-Object name -Like "*.ps1"
 			Write-Verbose "Found $($Files.count) files"
-			if ([System.String]::IsNullOrEmpty($Destination)) {
-				$Destination = $(Join-Path -Path $Source -ChildPath 'Tests')
-				}
 		}
 		else {
 			if ($Source -like "*.ps1") {
 				$Files = Get-item -Path $Source
-				$SourceIsFile = $true
-				if ([System.String]::IsNullOrEmpty($Destination)) {
-				$Destination = $(Join-Path -Path $(Split-Path -Path $Source -Parent) -ChildPath 'Tests')
-				}
-				Write-Verbose "Targeted single file"
 			}
 			else {
 				Write-Error "Source $($Source) is not a valid PowerShell file (.ps1)"
@@ -131,24 +122,19 @@ Describe -Tags 'PSSA' -Name 'Testing against PSScriptAnalyzer rules' {
 			}
 			else {
 				try {
-					if ($SourceIsFolder) {
-						if ($($(Test-Path -PathType Container -Path $Destination) -eq $false) -and 
-						$($_ -Match "^(([c-z]:\\)|\/)((\\|\/)?[\w.-]*(\\|\/)?)+")) {
-							New-Item -ItemType Container -Path $Destination -ErrorAction Stop
-						}
-						elseif ($(-not $($_ | Select-String -Pattern "^(([c-z]:\\)|\/)((\\|\/)?[\w.-]*(\\|\/)?)+")) -and $(Test-Path -Path $Destination -IsValid) -and
-						 $($Destination -ne $(Join-Path -Path $($(Get-Item $Source).FullName) -ChildPath 'Tests'))) {
-							 '2'
-							New-Item -ItemType Container -Path $Destination -ErrorAction Stop
-						}
-						elseif ($(Test-Path -Path $Destination -IsValid) -eq $false) {
-							Write-Error "Please enter a valid destination path."
-							break
-						}
-					} elseif ($SourceIsFile) {
-						if ($(Test-Path -Path $Destination) -eq $false) {
-						New-Item -Path $Destination -ItemType Container -ErrorAction 'Stop'
-						}
+					if ($($(Test-Path -PathType Container -Path $Destination) -eq $false) -and $($_ -Match "^[c-z]:\\|[/]+[a-zA-Z]+[\\/]?$")) {
+						New-Item -ItemType Container -Path $Destination -ErrorAction Stop
+					}
+					elseif ($($_ -NotMatch "^[c-z]:\\|[/]+[a-zA-Z]+[\\/]?$") -and $(Test-Path -Path $Destination -IsValid) -and
+					 $($Destination -ne $(Join-Path -Path $($(Get-Item $Source).FullName) -ChildPath 'Tests'))) {
+						New-Item -ItemType Container -Path $Destination -ErrorAction Stop
+					}
+					elseif ($(Test-Path -Path $Destination -IsValid) -eq $false) {
+						Write-Error "Please enter a valid destination path."
+						break
+					} else {
+						Write-Error "Failed to vailidate destination path. Error: $($_.Exception.Message)"
+						break
 					}
 					$NewFilePathandName = Join-Path -Path $Destination -ChildPath "$($i.BaseName).Tests.ps1"
 					try {
