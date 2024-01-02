@@ -62,7 +62,7 @@ function New-NTModuleTemplate {
 	Param (
 		[Parameter(Mandatory, ValueFromPipeline)]
 		[string[]]$Names,
-		[System.IO.DirectoryInfo]$Path = $(Get-Item -Path .\).FullName,
+		[System.IO.DirectoryInfo]$Path = $PWD.Path,
 		[string]$Author = $env:USER,
 		[string]$CompanyName = "",
 		[string]$Description = "Module Description",
@@ -77,7 +77,6 @@ function New-NTModuleTemplate {
 		$Colors = "$Templates\Colors.ps1"
 		$GitIgnore = "$Templates\GitIgnore"
 	}
-
 	process {
 		foreach ($Name in $Names) {
 			$Directories = @(
@@ -87,30 +86,65 @@ function New-NTModuleTemplate {
 				'Public\Tests'
 				'Private\Tests'
 			)
-			foreach ($Directory in $Directories) {
-				New-Item -Name "$Path\$Name\$Directory" -ItemType 'Container'
-				Set-Content -Value "# $Name $Directory Functions" -Path "$Path\$Name\$Directory\README.md"
-				Write-Verbose "Generated $Path\$Name\$Directory."
+			$ParentPath = Join-Path -Path $Path -ChildPath $Name
+			try {
+				if (-not (Test-Path -Path $ParentPath)) {
+					Write-Verbose "Creating Module path: $ParentPath."
+					New-Item -Path $ParentPath -Type Directory -ErrorAction Stop
+				}
 			}
-
-			Set-Content -Value "# $Name Powershell Module" -Path "$Path\$Name\README.md"
-			Add-Content -Value "`n*$Description*`n" -Path "$Path\$Name\README.md"
-
-			Copy-Item $Config "$Path\$Name\Config.ps1"
-			Write-Verbose "Copied $Config to $Path\$Name\Config.ps1."
-
+			catch {
+				Write-Verbose "Failed to create Module path: $ParentPath."
+				$_
+				break
+			}
+			try {
+				foreach ($Directory in $Directories) {
+					$FullPath = Join-Path -Path $ParentPath -ChildPath $Directory
+					if (-not (Test-Path -Path $FullPath)) {
+						Write-Verbose "Creating path: $FullPath."
+						New-Item -Path $FullPath -Type Directory -ErrorAction Stop
+						Write-Verbose "Created path: $FullPath."
+					}
+					$ReadmePath = Join-Path -Path $FullPath -ChildPath "README.md"
+					Set-Content -Value "# $Name $Directory" -Path $ReadmePath -ErrorAction Stop
+				}
+			}
+			catch {
+				Write-Verbose "Failed to create path: $FullPath."
+				$_
+				break
+			}
+	
+			$ReadmePath = Join-Path -Path $Path -ChildPath "$Name\README.md"
+			Set-Content -Value "# $Name Powershell Module" -Path $ReadmePath
+			Add-Content -Value "`n*$Description*`n" -Path $ReadmePath
+	
+			$ConfigPath = Join-Path -Path $Path -ChildPath "$Name\Config.ps1"
+			if (Test-Path -Path $Config) {
+				Copy-Item $Config $ConfigPath
+				Write-Verbose "Copied $Config to $ConfigPath."
+			}
+	
 			if ($UncommentConfig) {
-				(Get-Content $Module) -Replace ('\#\.\s', '. ') |
-				Set-Content "$Path\$Name\$Name.psm1"
+				$ModuleContent = Get-Content $Module
+				$ModulePath = Join-Path -Path $Path -ChildPath "$Name\$Name.psm1"
+				$ModuleContent -Replace ('\#\.\s', '. ') | Set-Content $ModulePath
 			}
 			else {
-				Copy-Item $Module "$Path\$Name\$Name.psm1"
+				$ModulePath = Join-Path -Path $Path -ChildPath "$Name\$Name.psm1"
+				if (Test-Path -Path $Module) {
+					Copy-Item $Module $ModulePath
+				}
 			}
-			Write-Verbose "Copied $Module to $Path\$Name\$Name.psm1."
-
-			Copy-Item $Colors "$Path\$Name\Colors.ps1"
-			Write-Verbose "Copied $Colors to $Path\$Name\Colors.ps1."
-
+			Write-Verbose "Copied $Module to $ModulePath."
+	
+			$ColorsPath = Join-Path -Path $Path -ChildPath "$Name\Colors.ps1"
+			if (Test-Path -Path $Colors) {
+				Copy-Item $Colors $ColorsPath
+				Write-Verbose "Copied $Colors to $ColorsPath."
+			}
+	
 			$Params = @{
 				Path              = "$Path\$Name\$Name.psd1"
 				Author            = $Author
@@ -126,7 +160,7 @@ function New-NTModuleTemplate {
 			}
 			New-ModuleManifest @Params
 			Write-Verbose "Generated $Module manifest at $Path\$Name\$Name.psd1."
-
+	
 			Copy-Item $GitIgnore "$Path\$Name\.gitignore"
 			Write-Verbose "Copied $GitIgnore to $Path\$Name\.gitignore."
 		}
