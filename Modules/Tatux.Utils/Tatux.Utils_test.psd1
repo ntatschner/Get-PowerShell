@@ -36,7 +36,7 @@
     FunctionsToExport = '*'
     
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport = '*'
+    CmdletsToExport = @("ConvertFrom-NTFlatJSON", "ConvertFrom-NTInvalidFolderCharacters", "ConvertTo-NTFlatJSON", "Generate-NTPassword", "Get-NTBreakTimer", "Get-NTComplianceExportURL", "Get-NTSoftware", "Get-NTSystemInfo", "Invoke-NativeExpression", "Invoke-NTCommandExclusivity", "New-NTModuleTemplate", "New-NTPesterTests", "Remove-NTDiacritics", "Replace-String", "Save-NTGitHubFile", "Search-Exceldoc", "Search-PDFDoc", "Search-Worddoc", "Update-NTModuleManifest", "Write-NTSPLog")
     
     # Variables to export from this module
     VariablesToExport = '*'
