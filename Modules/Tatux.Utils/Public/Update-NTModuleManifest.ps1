@@ -11,7 +11,7 @@ function Update-NTModuleManifest {
     [string]$Path
 
     )
-# Test if paths a valid manifest file and if so has the right field
+# Test if paths a valid manifest file and if so has the right field FunctionsToExport
 
 
 }
